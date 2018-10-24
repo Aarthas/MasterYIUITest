@@ -1,7 +1,7 @@
 # MasterYI UI Test Framework
 易大师UI自动化测试框架
 
- **_当前版本：0.1.0beta_** 
+ **_当前版本：0.2.0beta_** 
 
 码云地址：https://gitee.com/xuwangcheng/MasterYI-UI-Test-Framework  
 更新日志: [易大师UI自动化测试框架-更新日志](https://gitee.com/xuwangcheng/MasterYI-UI-Test-Framework/wikis/pages?title=%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97&parent=)  
@@ -31,7 +31,7 @@
 - 基于PageModel模型编写测试业务代码，代码复用性高、易理解，灵活;  
 - 使用数据工厂生产测试数据，分离业务代码和测试数据；
 - 默认实现了多款不同的测试报告模板，用户可实现自定义的报告处理器；
-- 快捷的邮件推送测试结果和测试报告附件；
+- 邮件推送测试结果和测试报告附件；
 - 分布式执行；
 - 内置定时执行器；
 - 集成spring boot，可对接任何自动化管理系统或平台，对外提供用例查询、测试执行、报表数据查询等接口（尚未完成）；
