@@ -4,7 +4,7 @@
 
 	<groupId>com.dcits</groupId>
 	<artifactId>MasterYIUITest</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.2.0beta</version>
 	<packaging>jar</packaging>
 
 	<name>MasterYIUITest</name>
@@ -18,21 +18,28 @@
 		<selenium.version>3.13.0</selenium.version>
 		<poi.version>3.17</poi.version>
 	</properties>
+	
+	 <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.8.RELEASE </version>
+        <relativePath></relativePath>
+    </parent>
 
 	<dependencies>
 		<!-- mysql驱动 -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>5.1.44</version>
-		</dependency>
+		</dependency> -->
 
 		<!-- selenium相关 -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
 			<version>${selenium.version}</version>
-		</dependency>
+		</dependency> -->
 
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
@@ -48,7 +55,7 @@
 		</dependency>
 
 		<!-- log4j 2 -->
-		<dependency>
+		<!-- <dependency>
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-core</artifactId>
 			<version>${log4j.version}</version>
@@ -62,7 +69,7 @@
 			<groupId>org.apache.logging.log4j</groupId>
 			<artifactId>log4j-web</artifactId>
 			<version>${log4j.version}</version>
-		</dependency>
+		</dependency> -->
 		
 		<dependency>
 		    <groupId>cglib</groupId>
@@ -85,12 +92,12 @@
 		</dependency>
 		
 		<!-- https://mvnrepository.com/artifact/org.freemarker/freemarker -->
-		<dependency>
+		<!-- <dependency>
 		    <groupId>org.freemarker</groupId>
 		    <artifactId>freemarker</artifactId>
 		    <version>2.3.28</version>
 		    <scope>test</scope>
-		</dependency>
+		</dependency> -->
 		
 		<!-- 邮件 -->
 		<dependency>
@@ -99,15 +106,29 @@
 		    <version>1.4.7</version>
 		</dependency>
 		
-		<!-- https://mvnrepository.com/artifact/junit/junit -->
-		<dependency>
-		    <groupId>junit</groupId>
-		    <artifactId>junit</artifactId>
-		    <version>4.12</version>
-		    <scope>test</scope>
+		<!-- spring boot -->
+	  	<dependency>
+           <groupId>org.springframework.boot</groupId>
+           <artifactId>spring-boot-starter-web</artifactId>
+           <exclusions>
+		      <exclusion>
+		         <groupId>org.springframework.boot</groupId>
+		         <artifactId>spring-boot-starter-logging</artifactId>
+		      </exclusion>
+		   </exclusions>
+        </dependency>
+        
+        <dependency>
+		   <groupId>org.springframework.boot</groupId>
+		   <artifactId>spring-boot-starter-log4j2</artifactId>
 		</dependency>
 		
-		
+		<!-- https://mvnrepository.com/artifact/junit/junit -->
+		<!-- <dependency>
+		    <groupId>junit</groupId>
+		    <artifactId>junit</artifactId>
+		    <scope>test</scope>
+		</dependency> -->
 	</dependencies>
 
 
@@ -130,6 +151,22 @@
 					<target>1.8</target>
 				</configuration>
 			</plugin>
+			 <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+                <configuration>
+                    <fork>true</fork>
+                    <!-- spring-boot:run 中文乱码解决 -->
+                    <jvmArguments>-Dfile.encoding=UTF-8</jvmArguments>
+                </configuration>
+                <dependencies>
+                    <dependency>
+                        <groupId>org.springframework</groupId>
+                        <artifactId>springloaded</artifactId>
+                        <version>1.2.8.RELEASE</version>
+                    </dependency>
+                </dependencies>
+            </plugin>
 		</plugins>
 	</build>
 </project>

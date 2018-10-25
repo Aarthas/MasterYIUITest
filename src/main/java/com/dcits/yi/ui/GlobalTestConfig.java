@@ -3,6 +3,7 @@ package com.dcits.yi.ui;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.dcits.yi.tool.TestKit;
 import com.dcits.yi.ui.data.db.TestDB;
@@ -32,11 +33,20 @@ public class GlobalTestConfig {
 	public static Map elements = new HashMap<>();	
 	
 	private static ThreadLocal<TestRunningObject> tro = new ThreadLocal<TestRunningObject>();
+	
+	/**
+	 * 当前是否正在进行自动化测试
+	 */
+	public static AtomicBoolean testing = new AtomicBoolean(false);
+	
+	/**
+	 * 定时任务id
+	 */
+	public static String cronTaskId;
 
 	static {
 		initFramework();
 	}
-	
 	
 	public static TestRunningObject getTestRunningObject() {
 		TestRunningObject o = tro.get();

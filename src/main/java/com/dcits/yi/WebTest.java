@@ -69,6 +69,8 @@ public class WebTest {
 	
 	private List<IReportManager> reportManagers = new ArrayList<IReportManager>();
 	
+	private static Object lock = new Object();
+	
 	/**
 	 * 实例化测试对象
 	 * @param suiteYamlFileName 设定测试套件的yaml文件名称，不带.yaml后缀，在文件中定义执行规则
@@ -100,9 +102,21 @@ public class WebTest {
 	 * 	两种都配置了优先使用yaml配置文件进行测试
 	 * @throws Exception 
 	 */
-	public void start() throws Exception {
-		logger.info("开始执行测试，测试用例数为{}个", cases.size());
+	public void start() {
+		//判断当前有没有正在执行的测试任务		
+		synchronized (lock) {
+			while (GlobalTestConfig.testing.get()) {
+				try {
+					lock.wait(800);
+				} catch (InterruptedException e) {
+					logger.warn(e);
+				}
+			}
+			GlobalTestConfig.testing.set(true);
+		}
 		
+		logger.info("开始执行测试，测试用例数为{}个", cases.size());	
+
 		TimeInterval interval = new TimeInterval();
 		GlobalTestConfig.report = new SuiteReport();
 		GlobalTestConfig.report.setTitle(testTitle);
@@ -137,6 +151,10 @@ public class WebTest {
 		GlobalTestConfig.report.setUseTime(interval.intervalMs());	
 		
 		GlobalTestConfig.report.setReportName(GlobalTestConfig.report.getTitle() + "_" + DateUtil.format(new Date(), "yyyyMMddHHmmss"));
+		GlobalTestConfig.report.setFinished(true);
+		
+		GlobalTestConfig.testing.set(false);
+		
 		manageReport();
 		logger.info("测试完成");
 	}
@@ -145,8 +163,8 @@ public class WebTest {
 	 * 使用配置文件配置的定时任务规则
 	 * @throws Exception 
 	 */
-	public void startCron() throws Exception {
-		startCron(GlobalTestConfig.ENV_INFO.getCronExpression());
+	public String startCron() throws Exception {
+		return startCron(GlobalTestConfig.ENV_INFO.getCronExpression());
 	}
 	
 	/**
@@ -154,15 +172,15 @@ public class WebTest {
 	 * @param expression 传入定时规则表达式
 	 * @throws Exception 
 	 */
-	public void startCron(String expression) throws Exception {
+	public String startCron(String expression) throws Exception {
 		if (!GlobalTestConfig.ENV_INFO.isCronEnabled()) {
 			logger.warn("cron.enabled=false, 不能开启定时测试任务，请修改seleniumConfig.properties配置文件!");
-			return;
+			return "cron.enabled=false, 不能开启定时测试任务，请修改seleniumConfig.properties配置文件!";
 		}
 		
 		logger.info("定时测试任务已开启, CronExpression[{}]", expression);
 		start();
-		CronUtil.schedule(expression, new Task() {
+		GlobalTestConfig.cronTaskId = CronUtil.schedule(expression, new Task() {
 		    @Override
 		    public void execute() {
 		    	try {
@@ -174,6 +192,7 @@ public class WebTest {
 		});
 			
 		CronUtil.start();
+		return "true";
 	}
 	
 	/**
@@ -182,9 +201,8 @@ public class WebTest {
 	 */
 	private void init() throws Exception {
 		if (cases.size() == 0) {
-			logger.info("可执行用例个数为0,测试退出！");
-			clean();
-			System.exit(0);
+			logger.info("可执行测试用例个数为0！");
+			throw new Exception("当前无可执行的测试用例!");
 		}			
 		initPageObject();
 	}

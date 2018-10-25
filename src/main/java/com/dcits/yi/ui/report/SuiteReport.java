@@ -5,6 +5,8 @@ import java.util.List;
 
 import com.dcits.yi.ui.EnvSettingInfo;
 
+import cn.hutool.json.JSONObject;
+
 /**
  * 测试套件报告
  * @author xuwangcheng
@@ -67,6 +69,18 @@ public class SuiteReport {
 	 */
 	private String reportName;
 	
+	/**
+	 * 是否测试完成
+	 */
+	private boolean finished = false;
+	
+	public void setFinished(boolean finished) {
+		this.finished = finished;
+	}
+	
+	public boolean isFinished() {
+		return finished;
+	}
 	
 	public synchronized void setSkipCount(int skipCount) {
 		this.skipCount = skipCount;
