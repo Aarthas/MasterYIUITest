@@ -12,11 +12,21 @@
 ![22](https://images.gitee.com/uploads/images/2018/1024/145756_bff03bfc_431003.png "屏幕截图.png") &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;![4444](https://images.gitee.com/uploads/images/2018/1024/150236_2e04418c_431003.png "屏幕截图.png")  
 `QQ群号：468324085  加群验证：易大师`&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;`公众号：测试无极之道`  
 
+<br>
 
+ **基于PageMode模型进行测试代码编程的UI自动化测试框架，元素定位、业务逻辑、测试数据分离;底层由selenium-java框架支持，使用yaml文件定义元素定位和用例执行规则。** 
+ 
+ **主要功能：**  
+- [yaml文件定义元素信息，方便阅读、编写和维护](https://gitee.com/xuwangcheng/MasterYI-UI-Test-Framework/wikis/pages?title=%E5%85%83%E7%B4%A0%E5%AE%9A%E4%B9%89&parent=%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E)；  
+- [基于PageModel模型编写测试业务代码，代码复用性高、易理解，灵活](https://gitee.com/xuwangcheng/MasterYI-UI-Test-Framework/wikis/pages?title=PageModel%E7%B1%BB&parent=%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E);  
+- [使用数据工厂生产测试数据，分离业务代码和测试数据](https://gitee.com/xuwangcheng/MasterYI-UI-Test-Framework/wikis/pages?title=%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B%EF%BC%88%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE%E7%94%9F%E6%88%90%EF%BC%89&parent=%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E)；
+- [默认实现了多款不同的测试报告模板，用户可实现自定义的报告处理器](https://gitee.com/xuwangcheng/MasterYI-UI-Test-Framework/wikis/pages?title=%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A%E5%A4%84%E7%90%86%E5%99%A8&parent=%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E)；
+- [邮件推送测试结果和测试报告附件](https://gitee.com/xuwangcheng/MasterYI-UI-Test-Framework/wikis/pages?title=%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A%E5%A4%84%E7%90%86%E5%99%A8&parent=%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E)；
+- [分布式执行](https://gitee.com/xuwangcheng/MasterYI-UI-Test-Framework/wikis/pages?title=%E5%88%86%E5%B8%83%E5%BC%8F%E6%89%A7%E8%A1%8C&parent=%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E)；
+- [内置定时执行器](https://gitee.com/xuwangcheng/MasterYI-UI-Test-Framework/wikis/pages?title=%E5%AE%9A%E6%97%B6%E6%B5%8B%E8%AF%95%E4%BB%BB%E5%8A%A1&parent=%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E)；
+- [集成spring boot，可对接任何自动化管理系统或平台，对外提供用例查询、测试执行、报表数据查询等接口](https://gitee.com/xuwangcheng/MasterYI-UI-Test-Framework/wikis/pages?title=API%E6%8E%A5%E5%8F%A3&parent=%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E)；
+- java语言编写，熟悉java编程的可快速上手。
 
-
-基于PageMode模型进行测试代码编程的UI自动化测试框架，元素定位、业务逻辑、测试数据分离。    
-底层由selenium-java框架支持，使用yaml文件定义元素定位和用例执行规则。 
 
 在开发过程中参考了以下优秀的自动化测试框架的某些思路或思想，在此感谢：  
 - [Sweetest-小而美的自动化测试框架](https://github.com/tonglei100/sweetest)
@@ -25,17 +35,6 @@
 框架使用或者借鉴了以下开源工具：
 - [功能强大的java工具包Hutool](https://gitee.com/xuwangcheng/hutool)
 - [自动化测试报告ZTest](https://github.com/zhangfei19841004/ztest)  
-
-主要功能：
-- yaml文件定义元素信息，方便阅读、编写和维护；  
-- 基于PageModel模型编写测试业务代码，代码复用性高、易理解，灵活;  
-- 使用数据工厂生产测试数据，分离业务代码和测试数据；
-- 默认实现了多款不同的测试报告模板，用户可实现自定义的报告处理器；
-- 邮件推送测试结果和测试报告附件；
-- 分布式执行；
-- 内置定时执行器；
-- 集成spring boot，可对接任何自动化管理系统或平台，对外提供用例查询、测试执行、报表数据查询等接口；
-- java语言编写，熟悉java编程的可快速上手。
 
 
 ## 环境要求
