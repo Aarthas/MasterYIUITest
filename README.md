@@ -1,7 +1,7 @@
 # MasterYI UI Test Framework
 易大师UI自动化测试框架
 
- **_当前版本：0.3.0beta_** 
+ **_当前版本：0.3.1beta_** 
 
 码云地址：https://gitee.com/xuwangcheng/MasterYI-UI-Test-Framework  
 更新日志: [易大师UI自动化测试框架-更新日志](https://gitee.com/xuwangcheng/MasterYI-UI-Test-Framework/wikis/pages?title=%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97&parent=)  
@@ -25,6 +25,7 @@
 - [分布式执行](https://gitee.com/xuwangcheng/MasterYI-UI-Test-Framework/wikis/pages?title=%E5%88%86%E5%B8%83%E5%BC%8F%E6%89%A7%E8%A1%8C&parent=%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E)；
 - [内置定时执行器](https://gitee.com/xuwangcheng/MasterYI-UI-Test-Framework/wikis/pages?title=%E5%AE%9A%E6%97%B6%E6%B5%8B%E8%AF%95%E4%BB%BB%E5%8A%A1&parent=%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E)；
 - [集成spring boot，可对接任何自动化管理系统或平台，对外提供用例查询、测试执行、报表数据查询等接口](https://gitee.com/xuwangcheng/MasterYI-UI-Test-Framework/wikis/pages?title=API%E6%8E%A5%E5%8F%A3&parent=%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E)；
+- 同一个测试用例可以在同一次测试中配置不同类型的浏览器进行测试；
 - java语言编写，熟悉java编程的可快速上手。
 
 
