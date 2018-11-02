@@ -1,11 +1,11 @@
 package com.dcits.yi.ui.report;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.dcits.yi.ui.EnvSettingInfo;
-
-import cn.hutool.json.JSONObject;
 
 /**
  * 测试套件报告
@@ -22,7 +22,7 @@ public class SuiteReport {
 	/**
 	 * 浏览器名称
 	 */
-	private String browserName;
+	private Set<String> browserName = new HashSet<String>();
 	/**
 	 * 开始时间
 	 */
@@ -82,7 +82,7 @@ public class SuiteReport {
 		return finished;
 	}
 	
-	public synchronized void setSkipCount(int skipCount) {
+	public void setSkipCount(int skipCount) {
 		this.skipCount = skipCount;
 	}
 	
@@ -114,14 +114,14 @@ public class SuiteReport {
 		this.title = title;
 	}
 
-	public String getBrowserName() {
-		return browserName;
-	}
-
-	public void setBrowserName(String browserName) {
+	public void setBrowserName(Set<String> browserName) {
 		this.browserName = browserName;
 	}
-
+	
+	public Set<String> getBrowserName() {
+		return browserName;
+	}
+	
 	public String getTestTime() {
 		return testTime;
 	}
@@ -145,21 +145,25 @@ public class SuiteReport {
 	public void setTotalCount(int totalCount) {
 		this.totalCount = totalCount;
 	}
+	
+	public void addTotalCount(int count) {
+		this.totalCount += count;
+	}
 
 	public int getSuccessCount() {
 		return successCount;
 	}
 
-	public synchronized void setSuccessCount() {
-		this.successCount += 1;
+	public void setSuccessCount(int successCount) {
+		this.successCount = successCount;
 	}
 
 	public int getFailCount() {
 		return failCount;
 	}
 
-	public synchronized void setFailCount() {
-		this.failCount += 1;
+	public void setFailCount(int failCount) {
+		this.failCount = failCount;
 	}
 
 	public EnvSettingInfo getEnv() {

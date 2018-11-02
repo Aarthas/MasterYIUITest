@@ -420,13 +420,13 @@ return(!i||i!==r&&!b.contains(r,i))&&(e.type=o.origType,n=o.handler.apply(this,a
 	//创建reportHtml--传入一个reportSet
 	function createReport(reportSet, num){
 		var html='<div class="feature">';
-		html+='<h2><span class="val">' + reportSet.caseName+'</span></h2>';
+		html+='<h2><span class="val">' + reportSet.caseName + '[' + reportSet.browserType + ']' +'</span></h2>';
 		html+='<p class="narrative"></p>';
 		html+='<div class=\'scenario\'>';
 		if(reportSet.status == "fail" || reportSet.status == "error"){
-			html += '<h3 style="background:#C40D0D;color:#FFFFFF;" id="scenario_' + num + '"><span class="keyword">场景:</span> <span class="val">' + reportSet.caseName + '</span><span style="color:black;float:right;">' + detailsObject.browserName + '</span></h3>';
+			html += '<h3 style="background:#C40D0D;color:#FFFFFF;" id="scenario_' + num + '"><span class="keyword">场景:</span> <span class="val">' + reportSet.caseName + '</span><span style="color:black;float:right;">' + reportSet.browserType + '</span></h3>';
 		}else{
-			html += '<h3 id="scenario_' + num + '"><span class="keyword">场景:</span> <span class="val">' + reportSet.caseName + '</span><span style="color:black;float:right;">' + detailsObject.browserName + '</span></h3>';
+			html += '<h3 id="scenario_' + num + '"><span class="keyword">场景:</span> <span class="val">' + reportSet.caseName + '</span><span style="color:black;float:right;">' + reportSet.browserType + '</span></h3>';
 	
 		}
 		html += '<ol>';

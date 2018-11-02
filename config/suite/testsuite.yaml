@@ -1,6 +1,7 @@
 # 测试标题
 title: 易大师框架测试
 # 执行浏览器类型
+# browserType: [chrome, ie, firefox]
 browserType: chrome
 # 该用例执行失败了是否中断整个测试流程？默认为false,可单独给每个用例配置
 failInterrupt: false
@@ -19,12 +20,15 @@ cases:
     enabled: true   
     tag: 2
     failInterrupt: true
+    # browserType: [chrome, ie, firefox]
+    browserType: ie
   
   - name: 百度搜索
     method: com.dcits.test.baidu.usecase.Baidu.search
     enabled: true
     tag: 3
     failInterrupt: true
+    browserType: [chrome, firefox]
 
   
   

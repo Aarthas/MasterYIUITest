@@ -1,8 +1,13 @@
 package com.dcits.yi.ui;
 
+import java.net.MalformedURLException;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.openqa.selenium.WebDriver;
 
 import com.dcits.yi.constant.TestConst;
+import com.dcits.yi.ui.driver.SeleniumDriver;
 import com.dcits.yi.ui.element.Locator;
 import com.dcits.yi.ui.report.CaseReport;
 import com.dcits.yi.ui.report.StepReport;
@@ -12,7 +17,7 @@ import cn.hutool.log.Log;
 import cn.hutool.log.LogFactory;
 
 /**
- * 属于每个测试线程的运行对象
+ * 属于每个线程的测试运行对象
  * @author xuwangcheng
  * @version 20181012
  *
@@ -21,6 +26,7 @@ public class TestRunningObject {
 	private static final Log logger = LogFactory.get();
 	
 	private WebDriver driver;
+	private Map<String, WebDriver> drivers = new HashMap<String, WebDriver>();
 	private CaseReport caseReport;
 	private StepReport stepReport;
 	/**
@@ -29,13 +35,16 @@ public class TestRunningObject {
 	private String currentFrameName = TestConst.DEFAULT_FRAME_NAME;
 	private String currentWindowHandle = null;
 	
-	
 	public WebDriver getDriver() {
 		return driver;
 	}
 	
-	public void setDriver(WebDriver driver) {
-		this.driver = driver;
+	public void setDriver(String browserType) throws MalformedURLException {
+		driver = drivers.get(browserType.toLowerCase());
+		if (driver == null) {
+			driver = SeleniumDriver.initWebDriver(browserType);
+			drivers.put(browserType.toLowerCase(), driver);
+		}
 	}
 	
 	public void setCurrentFrameName(String currentFrameName) {
@@ -76,7 +85,7 @@ public class TestRunningObject {
 			currentFrameName = locator.getName();
 		} catch (Exception e) {
 			// TODO: handle exception
-			logger.info("Switch To Frame {} Fail!", locator.getName());
+			logger.info("Switch To Frame {}:{} => {}[{}] Fail!", locator.getName(), locator.getLocationType(), locator.getLocationValue(), locator.getLocationSeq());
 			throw e;
 		}
 	}
@@ -94,6 +103,14 @@ public class TestRunningObject {
 	public void setStepReport(StepReport stepReport) {
 		if (this.caseReport != null && this.stepReport != null) this.caseReport.getStepReports().add(this.stepReport);
 		this.stepReport = stepReport;
+	}
+	
+	public Map<String, WebDriver> getDrivers() {
+		return drivers;
+	}
+	
+	public void setDrivers(Map<String, WebDriver> drivers) {
+		this.drivers = drivers;
 	}
 	
 }

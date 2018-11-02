@@ -2,7 +2,9 @@ package com.dcits.yi.ui.usecase;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import com.dcits.yi.ui.GlobalTestConfig;
 import com.dcits.yi.ui.element.BasePage;
@@ -23,6 +25,8 @@ import cn.hutool.log.LogFactory;
 public class ExecuteCaseModel {	
 	
 	private static final Log logger = LogFactory.get();
+	
+	private Set<String> browserType = new HashSet<String>();
 	
 	/**
 	 * 用例执行方法，包含多个，按顺序执行
@@ -55,10 +59,11 @@ public class ExecuteCaseModel {
 	/**
 	 * 执行该用例的自动化测试
 	 */
-	public void execute() {
-		logger.info("开始执行测试用例 {}[tag={}] ", name, tag);
+	public void execute(String browserName) {
+		logger.info("开始执行测试用例 {}[tag={}][broswerType={}] ", name, tag, browserName);
 		
 		CaseReport r = new CaseReport();
+		r.setBrowserType(browserName);
 		r.setCaseName(name);
 		r.setCaseMethodPath(getMethodPaths());
 		GlobalTestConfig.getTestRunningObject().setCaseReport(r);
@@ -72,17 +77,15 @@ public class ExecuteCaseModel {
 				Method m = methods.get(i);
 				m.invoke(targets.get(i));						
 			}				
-			logger.info("测试用例 {}[tag={}] 执行成功!", name, tag);
-			GlobalTestConfig.report.setSuccessCount();
+			logger.info("测试用例 {}[tag={}][broswerType={}] 执行成功!", name, tag, browserName);
 		} catch (Exception e) {
-			logger.error(e, "执行用例{}[tag={}]失败!", this.name, this.tag);
-			
+			logger.error(e, "执行用例{}[tag={}][broswerType={}] 失败!", name, tag, browserName);			
 			this.successFlag = false;
 			GlobalTestConfig.getTestRunningObject().getStepReport().setStatus(false);			
 			r.setStatus("fail");
-			r.setMark(GlobalTestConfig.getTestRunningObject().getStepReport().getMark());			
-			GlobalTestConfig.report.setFailCount();					
+			r.setMark(GlobalTestConfig.getTestRunningObject().getStepReport().getMark());						
 			GlobalTestConfig.getTestRunningObject().getStepReport().setStepName();
+			
 			BasePage.screenshot();
 		}
 		
@@ -91,7 +94,7 @@ public class ExecuteCaseModel {
 		r.setFinishTime(DateUtil.now());
 		
 		GlobalTestConfig.getTestRunningObject().setStepReport(null);
-		GlobalTestConfig.getTestRunningObject().setCaseReport(null);		
+		GlobalTestConfig.getTestRunningObject().setCaseReport(null);	
 	}
 	
 	public String getMethodPaths () {
@@ -100,6 +103,14 @@ public class ExecuteCaseModel {
 			s.add(m.getDeclaringClass().getName() + "." + m.getName());
 		}
 		return StrUtil.join("\n", s);
+	}
+	
+	public void setBrowserType(Set<String> browserType) {
+		this.browserType = browserType;
+	}
+	
+	public Set<String> getBrowserType() {
+		return browserType;
 	}
 	
 	public boolean isSuccessFlag() {

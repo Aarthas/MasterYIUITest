@@ -23,10 +23,10 @@ public class DefaultExeclReportManager implements IReportManager {
 	public void create(SuiteReport reportData) {
 		List<List<String>> rows = new ArrayList<>();
 		for (CaseReport r:reportData.getCaseReports()) {
-			rows.add(CollUtil.newArrayList(r.getCaseName(), r.getFinishTime(), r.getStatus(), r.getUseTime(), String.valueOf(r.getRunCount()), r.getMark()));
+			rows.add(CollUtil.newArrayList(r.getCaseName(), r.getBrowserType(),r.getFinishTime(), r.getStatus(), r.getUseTime(), String.valueOf(r.getRunCount()), r.getMark()));
 		}		
 		ExcelWriter writer = ExcelUtil.getWriter(GlobalTestConfig.ENV_INFO.getReportFolder() + "/" + reportData.getReportName() + ".xlsx");	
-		writer.writeHeadRow(CollUtil.newArrayList("用例名称", "执行时间", "状态", "耗时(ms)", "运行次数", "备注"));
+		writer.writeHeadRow(CollUtil.newArrayList("用例名称", "浏览器","执行时间", "状态", "耗时(ms)", "运行次数", "备注"));
 		writer.write(rows);
 		writer.close();
 	}

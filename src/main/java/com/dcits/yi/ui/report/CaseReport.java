@@ -10,6 +10,11 @@ import java.util.List;
  *
  */
 public class CaseReport {
+	
+	/**
+	 * 使用的浏览器类型
+	 */
+	private String browserType;
 	/**
 	 * 完成时间
 	 */
@@ -45,6 +50,14 @@ public class CaseReport {
 	private List<StepReport> stepReports = new ArrayList<StepReport>();
 	
 		
+	public void setBrowserType(String browserType) {
+		this.browserType = browserType;
+	}
+	
+	public String getBrowserType() {
+		return browserType;
+	}
+	
 	public void setCaseMethodPath(String caseMethodPath) {
 		this.caseMethodPath = caseMethodPath;
 	}

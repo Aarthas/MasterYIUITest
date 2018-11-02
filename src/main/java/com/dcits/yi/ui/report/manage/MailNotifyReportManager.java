@@ -44,6 +44,7 @@ public class MailNotifyReportManager implements IReportManager {
 		data.put("totalCount", reportData.getTotalCount());
 		data.put("successCount", reportData.getSuccessCount());
 		data.put("failCount", reportData.getFailCount());
+		data.put("skipCount", reportData.getSkipCount());
 		data.put("testTime", reportData.getTestTime());
 		data.put("useTime", reportData.getUseTime());
 		

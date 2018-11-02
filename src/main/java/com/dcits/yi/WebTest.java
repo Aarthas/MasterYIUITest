@@ -7,9 +7,13 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicInteger;
+
+import org.openqa.selenium.WebDriver;
 
 import com.dcits.yi.constant.TestConst;
 import com.dcits.yi.tool.TestKit;
@@ -17,7 +21,6 @@ import com.dcits.yi.ui.GlobalTestConfig;
 import com.dcits.yi.ui.aop.CreateStepReportAspect;
 import com.dcits.yi.ui.data.BaseDataModel;
 import com.dcits.yi.ui.data.DataModelFactory;
-import com.dcits.yi.ui.driver.SeleniumDriver;
 import com.dcits.yi.ui.element.BasePage;
 import com.dcits.yi.ui.report.SuiteReport;
 import com.dcits.yi.ui.report.manage.IReportManager;
@@ -25,6 +28,7 @@ import com.dcits.yi.ui.usecase.ExecuteCaseModel;
 import com.dcits.yi.ui.usecase.UseCase;
 
 import cn.hutool.aop.ProxyUtil;
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.convert.Convert;
 import cn.hutool.core.convert.ConverterRegistry;
 import cn.hutool.core.date.DateUtil;
@@ -50,14 +54,14 @@ public class WebTest {
 	
 	private String testTitle = "Web自动化";
 	
-	private String broswerType = TestConst.BROWSER_CHROME;	
+	private Set<String> browserType = CollUtil.newHashSet(TestConst.BROWSER_CHROME);	
 	private boolean failInterrupt = false;	
 	private String tag = "default";	
 	private int retryCount = 2;
 	
 	private String suiteYamlFileName;	
 	private Class[] caseClasses;
-	
+
 	/**
 	 * 执行用例
 	 */
@@ -70,6 +74,11 @@ public class WebTest {
 	private List<IReportManager> reportManagers = new ArrayList<IReportManager>();
 	
 	private static Object lock = new Object();
+	
+	//分别表示 finishCount,successCount,failCount, SkipCount
+	private AtomicInteger[] testCounts;
+	
+	private int totalCount = 0;
 	
 	/**
 	 * 实例化测试对象
@@ -115,38 +124,41 @@ public class WebTest {
 			GlobalTestConfig.testing.set(true);
 		}
 		
-		logger.info("开始执行测试，测试用例数为{}个", cases.size());	
+		logger.info("开始执行测试，测试用例数为{}个", totalCount);	
 
 		TimeInterval interval = new TimeInterval();
 		GlobalTestConfig.report = new SuiteReport();
+		GlobalTestConfig.report.setTotalCount(totalCount);
 		GlobalTestConfig.report.setTitle(testTitle);
 		GlobalTestConfig.report.setEnv(GlobalTestConfig.ENV_INFO);
 		GlobalTestConfig.report.setTestTime(DateUtil.now());
-		GlobalTestConfig.report.setBrowserName(broswerType);
-		GlobalTestConfig.report.setTotalCount(cases.size());
+		GlobalTestConfig.report.setBrowserName(browserType);
 		
+		testCounts = new AtomicInteger[] {new AtomicInteger(0), new AtomicInteger(0), new AtomicInteger(0), new AtomicInteger(0)};
 		//执行用例	
 		if (GlobalTestConfig.ENV_INFO.isRemoteMode()) {
-			//分布式执行
-			AtomicInteger finishCount = new AtomicInteger(0);
+			//分布式执行			
 			for (String tagKey:tagCases.keySet()) {
 				ThreadUtil.execute(new Runnable() {					
 					@Override
 					public void run() {
-						autoTest(tagCases.get(tagKey), finishCount);	
+						autoTest(tagCases.get(tagKey));	
 					}
 				});
 			}			
-			while (finishCount.get() < cases.size()) {
+			while (testCounts[0].get() < GlobalTestConfig.report.getTotalCount()) {
 				try {
 					Thread.sleep(3000);
 				} catch (InterruptedException e) {}
-			}			
+			}	
 		} else {
 			//本地执行
-			autoTest(cases, null);			
+			autoTest(cases);			
 		}
 		
+		GlobalTestConfig.report.setSuccessCount(testCounts[1].get());
+		GlobalTestConfig.report.setFailCount(testCounts[2].get());
+		GlobalTestConfig.report.setSkipCount(testCounts[3].get());
 		GlobalTestConfig.report.setEndTime(DateUtil.now());
 		GlobalTestConfig.report.setUseTime(interval.intervalMs());	
 		
@@ -200,7 +212,7 @@ public class WebTest {
 	 * @throws Exception
 	 */
 	private void init() throws Exception {
-		if (cases.size() == 0) {
+		if (totalCount == 0) {
 			logger.info("可执行测试用例个数为0！");
 			throw new Exception("当前无可执行的测试用例!");
 		}			
@@ -228,11 +240,13 @@ public class WebTest {
 	 * 测试结束清理环境
 	 */
 	public void clean() {			
-		if (GlobalTestConfig.getTestRunningObject().getDriver() != null) {
-			//关闭webdriver
-			logger.info("关闭webdriver");
-			GlobalTestConfig.getTestRunningObject().getDriver().quit();		
-		}		
+		for (String key:GlobalTestConfig.getTestRunningObject().getDrivers().keySet()) {
+			WebDriver driver = GlobalTestConfig.getTestRunningObject().getDrivers().get(key);
+			if (driver != null) {
+				logger.info("关闭webdriver[" + key + "]");
+				driver.quit();
+			}
+		}
 	}
 	
 	/**
@@ -241,27 +255,37 @@ public class WebTest {
 	 * @param finishCount
 	 * @throws MalformedURLException
 	 */
-	private void autoTest(List<ExecuteCaseModel> execuCaseModels, AtomicInteger finishCount) {
-		try {
-			GlobalTestConfig.getTestRunningObject().setDriver(SeleniumDriver.initWebDriver(broswerType));
-		} catch (Exception e) {
-			logger.error(e, "WebDriver[{}]初始化出错！", broswerType);
-			if (finishCount != null) finishCount.addAndGet(execuCaseModels.size());
-			GlobalTestConfig.report.setSkipCount(GlobalTestConfig.report.getSkipCount() + execuCaseModels.size());
-			return;
-		}
+	private void autoTest(List<ExecuteCaseModel> execuCaseModels) {
+		boolean skipFlag = false;
 		
 		for (int i = 0;i < execuCaseModels.size();i++) {
-			ExecuteCaseModel ecm = execuCaseModels.get(i);
-			ecm.execute();
-			if (finishCount != null) finishCount.incrementAndGet();
-			if (!ecm.isSuccessFlag() && ecm.isFailInterrupt()) {
-				if (finishCount != null) finishCount.addAndGet(execuCaseModels.size() - i - 1);
-				GlobalTestConfig.report.setSkipCount(execuCaseModels.size() - i - 1);
-				break;
-			}
-		}
-		
+			ExecuteCaseModel ecm = execuCaseModels.get(i);			
+			for (String browserName:ecm.getBrowserType()) {
+				if (skipFlag) {
+					//跳过执行
+					testCounts[3].incrementAndGet();					
+				} else {
+					testCounts[0].incrementAndGet();
+					try {
+						GlobalTestConfig.getTestRunningObject().setDriver(browserName);
+					} catch (Exception e) {
+						logger.error(e, "获取WebDriver[{}]出错！", browserName);
+						testCounts[3].incrementAndGet();
+						continue;
+					}					
+					ecm.execute(browserName);
+					if (!ecm.isSuccessFlag()) {
+						if (ecm.isFailInterrupt()) {
+							skipFlag = true;
+						}
+						testCounts[2].incrementAndGet();
+						break;
+					} else {
+						testCounts[1].incrementAndGet();
+					}
+				}				
+			}			
+		}		
 		clean();
 	}
 	
@@ -301,7 +325,10 @@ public class WebTest {
 		try {
 			map = TestKit.parseYaml(GlobalTestConfig.ENV_INFO.getSuiteFolder() + "/" + suiteYamlFileName + ".yaml");
 			
-			broswerType = Convert.toStr(map.get("broswerType"), TestConst.BROWSER_CHROME);
+			if (map.get("browserType") != null) {
+				browserType = new HashSet<String>(ConverterRegistry.getInstance().convert(List.class, map.get("browserType"), Arrays.asList(new String[]{map.get("browserType").toString()})));
+			}
+			
 			failInterrupt = Convert.toBool(map.get("failInterrupt"), false);
 			tag = Convert.toStr(map.get("tag"), "default");
 			retryCount = Convert.toInt(map.get("retryCount"), 2);
@@ -324,7 +351,7 @@ public class WebTest {
 			
 			List<Map> cases = (List<Map>) map.get("cases");	
 			for (Map m:cases) {
-				//如果设置了enabled=false则忽略
+				//如果设置了enabled=false则忽略测试
 				if (!Convert.toBool(m.get("enabled"), true)) {
 					continue;
 				}		
@@ -343,6 +370,11 @@ public class WebTest {
 					caseModel.getMethods().add(ReflectUtil.getMethod(caseObj.getClass(), methodName));
 				}				
 				//获取其他属性
+				caseModel.setBrowserType(browserType);
+				if (m.get("browserType") != null) {
+					caseModel.setBrowserType(new HashSet<String>(ConverterRegistry.getInstance().convert(List.class, m.get("browserType"), Arrays.asList(new String[]{m.get("browserType").toString()}))));
+				}
+				
 				caseModel.setName(MapUtil.getStr(m, "name"));
 				caseModel.setFailInterrupt(Convert.toBool(m.get("failInterrupt"), failInterrupt));
 				caseModel.setRetryCount(Convert.toInt(m.get("retryCount"), retryCount));
@@ -351,6 +383,7 @@ public class WebTest {
 				if (!tagCases.containsKey(caseModel.getTag())) tagCases.put(caseModel.getTag(), new ArrayList<ExecuteCaseModel>());
 				tagCases.get(caseModel.getTag()).add(caseModel);
 				
+				totalCount += caseModel.getBrowserType().size();
 				this.cases.add(caseModel);
 			}
 			logger.info("测试用例配置文件{}.yaml解析完成", this.suiteYamlFileName);
@@ -387,6 +420,7 @@ public class WebTest {
 				caseModel.setFailInterrupt(uc.failInterrupt());
 				caseModel.setRetryCount(uc.retryCount());
 				caseModel.setTag(uc.tag());
+				caseModel.setBrowserType(uc.browserType().length == 0 ? browserType : CollUtil.newHashSet(uc.browserType()));
 				
 				caseModel.getTargets().add(o);
 				caseModel.getMethods().add(m);
@@ -394,6 +428,7 @@ public class WebTest {
 				if (!tagCases.containsKey(caseModel.getTag())) tagCases.put(caseModel.getTag(), new ArrayList<ExecuteCaseModel>());
 				tagCases.get(caseModel.getTag()).add(caseModel);
 				
+				totalCount += caseModel.getBrowserType().size();
 				this.cases.add(caseModel);
 			}
 		}
@@ -431,12 +466,12 @@ public class WebTest {
 		this.tag = tag;
 	}
 
-	public void setBroswerType(String broswerType) {
-		this.broswerType = broswerType;
+	public void setBrowserType(Set<String> browserType) {
+		this.browserType = browserType;
 	}
 	
-	public String getBroswerType() {
-		return broswerType;
+	public Set<String> getBrowserType() {
+		return browserType;
 	}
 
 	public List<IReportManager> getReportManagers() {

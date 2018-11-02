@@ -18,4 +18,5 @@ public @interface UseCase {
 	//标签，在分布式运行时根据标签分组
 	String tag() default "default";
 	int retryCount() default 0;
+	String[] browserType() default {};
 }

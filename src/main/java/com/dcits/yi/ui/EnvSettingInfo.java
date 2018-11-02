@@ -34,6 +34,8 @@ public class EnvSettingInfo {
 	private String operaDriverPath = TestKit.getProjectRootPath() + "/src/main/resources/operadriver.exe";
 	private String firefoxDriverPath = TestKit.getProjectRootPath() + "/src/main/resources/geckodriver.exe";
 	
+	private String firefoxBinPath = "";
+	
 	private Double defaultSleepSeconds;
 	
 	private Integer elementLocationRetryCount;
@@ -99,6 +101,7 @@ public class EnvSettingInfo {
 		cronSuite = props.getStr("cron.suitename", "");
 		cronExpression = props.getStr("cron.expression", "");
 		
+		firefoxBinPath = props.getStr("firefox.bin.path", "");
 		
 		if (!EnvSettingInfo.DEV_MODE) {
 			elementFolder =  TestKit.getProjectRootPath() + "/config/element/";
@@ -111,8 +114,9 @@ public class EnvSettingInfo {
 		
 		if (StrUtil.isNotEmpty(chromeDriverPath)) System.setProperty("webdriver.chrome.driver", chromeDriverPath);
 		if (StrUtil.isNotEmpty(ieDriverPath)) System.setProperty("webdriver.ie.driver", ieDriverPath);
-		if (StrUtil.isNotEmpty(firefoxDriverPath)) System.setProperty("webdriver.firefox.bin", firefoxDriverPath);
+		if (StrUtil.isNotEmpty(firefoxDriverPath)) System.setProperty("webdriver.gecko.driver", firefoxDriverPath);
 		if (StrUtil.isNotEmpty(operaDriverPath)) System.setProperty("webdriver.opera.driver", operaDriverPath);	
+		if (StrUtil.isNotEmpty(firefoxBinPath)) System.setProperty("webdriver.firefox.bin", firefoxBinPath);
 	}
 
 	public void setCronEnabled(boolean cronEnabled) {

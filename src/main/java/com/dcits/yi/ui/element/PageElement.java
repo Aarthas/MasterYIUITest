@@ -11,7 +11,6 @@ import com.dcits.yi.ui.GlobalTestConfig;
 import com.dcits.yi.ui.element.basics.IBaseElement;
 
 import cn.hutool.core.text.StrFormatter;
-import cn.hutool.core.util.ReUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.log.Log;
 import cn.hutool.log.LogFactory;

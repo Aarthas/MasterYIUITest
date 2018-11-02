@@ -71,9 +71,9 @@ public class BasePage extends BaseObject implements IBasePage {
 	 */
 	public static void screenshot() {
 		String pngName = DateUtil.format(new Date(), "yyyyMMddHHmmss") +".png";
-		String capturePath = GlobalTestConfig.ENV_INFO.getScreenshotFolder() + "/" + pngName;
-		File screenShotFile = ((TakesScreenshot)GlobalTestConfig.getTestRunningObject().getDriver()).getScreenshotAs(OutputType.FILE); 
+		String capturePath = GlobalTestConfig.ENV_INFO.getScreenshotFolder() + "/" + pngName;		
 		try {
+			File screenShotFile = ((TakesScreenshot)GlobalTestConfig.getTestRunningObject().getDriver()).getScreenshotAs(OutputType.FILE); 
 			FileUtils.copyFile(screenShotFile, new File(TestKit.getProjectRootPath() + capturePath));
 			GlobalTestConfig.getTestRunningObject().getStepReport().setScreenshot(capturePath);
 			logger.info("截图成功 => {}", capturePath);

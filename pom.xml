@@ -35,11 +35,11 @@
 		</dependency> -->
 
 		<!-- selenium相关 -->
-		<!-- <dependency>
+		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
 			<artifactId>selenium-java</artifactId>
 			<version>${selenium.version}</version>
-		</dependency> -->
+		</dependency>
 
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>

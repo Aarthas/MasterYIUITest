@@ -38,6 +38,7 @@ public class ZTestReportManager implements IReportManager {
 			String classMethod = caseReport.getCaseMethodPath();
 			result.put("className", classMethod.substring(0, classMethod.lastIndexOf(".")));
 			result.put("methodName", classMethod.substring(classMethod.lastIndexOf(".") + 1));
+			result.put("browserType", caseReport.getBrowserType());
 			result.put("description", caseReport.getCaseName());
 			result.put("spendTime", caseReport.getUseTime() + "ms");
 			result.put("status", "success".equals(caseReport.getStatus()) ? "成功" : "失败");
