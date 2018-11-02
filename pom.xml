@@ -24,7 +24,7 @@
         <artifactId>spring-boot-starter-parent</artifactId>
         <version>1.5.8.RELEASE </version>
         <relativePath></relativePath>
-    </parent>
+     </parent>
 
 	<dependencies>
 		<!-- mysql驱动 -->
