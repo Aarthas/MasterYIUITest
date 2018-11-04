@@ -20,7 +20,7 @@ import cn.hutool.json.JSONObject;
 public class ZTestReportManager implements IReportManager {
 
 	@Override
-	public void create(SuiteReport reportData) {
+	public String manage(SuiteReport reportData) {
 		JSONObject report = new JSONObject();
 		report.put("testPass", reportData.getSuccessCount());
 		report.put("testName", reportData.getTitle());
@@ -59,7 +59,15 @@ public class ZTestReportManager implements IReportManager {
 		String reportHtml = FileUtil.readString(TestKit.getProjectRootPath() + "/template/ztestTemplate", "utf-8");
 		
 		reportHtml = reportHtml.replace("${resultData}", json);
-		FileUtil.writeString(reportHtml, GlobalTestConfig.ENV_INFO.getReportFolder() + "/" + reportData.getReportName() + "_ztest" + ".html", "utf-8");		
+		String reportPath = createReportPath(reportData.getReportName());
+		FileUtil.writeString(reportHtml, reportPath, "utf-8");
+		
+		return reportPath;
+	}
+
+	@Override
+	public String createReportPath(String reportName) {		
+		return GlobalTestConfig.ENV_INFO.getReportFolder() + "/" + reportName + "_ztest" + ".html";
 	}
 
 }

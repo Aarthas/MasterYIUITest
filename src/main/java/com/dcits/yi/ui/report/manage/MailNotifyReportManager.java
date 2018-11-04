@@ -7,6 +7,7 @@ import com.dcits.yi.tool.TestKit;
 import com.dcits.yi.ui.GlobalTestConfig;
 import com.dcits.yi.ui.report.SuiteReport;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.extra.mail.MailUtil;
@@ -27,11 +28,11 @@ import cn.hutool.extra.template.TemplateUtil;
 public class MailNotifyReportManager implements IReportManager {
 
 	@Override
-	public void create(SuiteReport reportData) {
+	public String manage(SuiteReport reportData) {
 		//检查有没有生成测试报告文件，默认采用的ztest报告,如果没有则会先生成
 		String ztestHtml = GlobalTestConfig.ENV_INFO.getReportFolder() + "/" + reportData.getReportName() + "_ztest" + ".html";
 		if (!FileUtil.exist(ztestHtml)) {
-			new ZTestReportManager().create(reportData);
+			new ZTestReportManager().manage(reportData);
 		}
 		
 		Engine engine = TemplateUtil.createEngine(new TemplateConfig(TestKit.getProjectRootPath() + "/template", ResourceMode.FILE));
@@ -40,7 +41,7 @@ public class MailNotifyReportManager implements IReportManager {
 		
 		data.put("endTime", reportData.getEndTime());
 		data.put("title", reportData.getTitle());
-		data.put("browserName", reportData.getBrowserName());
+		data.put("browserName", CollUtil.join(reportData.getBrowserName(), ","));
 		data.put("totalCount", reportData.getTotalCount());
 		data.put("successCount", reportData.getSuccessCount());
 		data.put("failCount", reportData.getFailCount());
@@ -51,5 +52,12 @@ public class MailNotifyReportManager implements IReportManager {
 		String content = template.render(data);
 		MailUtil.send(GlobalTestConfig.ENV_INFO.getMailAccount(), GlobalTestConfig.ENV_INFO.getTos(), GlobalTestConfig.ENV_INFO.getCcs(), GlobalTestConfig.ENV_INFO.getBccs()
 				, "易大师UI自动化测试报告", content, true, new File(ztestHtml));
+		
+		return null;
+	}
+
+	@Override
+	public String createReportPath(String reportName) {
+		return null;
 	}
 }

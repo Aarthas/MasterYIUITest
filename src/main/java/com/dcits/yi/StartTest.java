@@ -2,7 +2,7 @@ package com.dcits.yi;
 
 import org.springframework.boot.SpringApplication;
 
-import com.dcits.yi.api.Application;
+import com.dcits.yi.springboot.Application;
 import com.dcits.yi.ui.EnvSettingInfo;
 import com.dcits.yi.ui.GlobalTestConfig;
 

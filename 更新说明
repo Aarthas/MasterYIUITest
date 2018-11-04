@@ -1,3 +1,10 @@
+0.3.2beta
+2018.11.4
+1、可以持久化测试报告数据到sqlite数据库，通过ReportPersistenceReportManager处理器完成
+2、修改IReportManager接口
+3、启动springboot时，可通过http://localhost:8080/report/list查询历史保存的测试结果数据
+
+
 0.3.1beta
 2018.11.2
 1、同一个用例可以在同一次测试中配置不同类型的浏览器进行测试

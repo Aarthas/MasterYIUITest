@@ -1,7 +1,13 @@
 package com.dcits.yi.tool;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.OutputStream;
 import java.util.Map;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.yaml.snakeyaml.Yaml;
 
@@ -94,5 +100,47 @@ public class TestKit {
 	public static String getStrIsNotEmpty(Props p, String key, String defaultValue) {
 		String v = p.getStr(key);
 		return StrUtil.isBlank(v) ? defaultValue : v;
+	}
+	
+	public static void renderDownload(HttpServletResponse response, String filePath, String fileName) {
+		response.setContentType("application/octet-stream");
+		response.setHeader("Content-Disposition", "attachment;fileName=" + fileName);
+		
+		File file = new File(filePath);
+		byte[] buffer = new byte[(int) file.length()];
+		FileInputStream fis = null;
+		BufferedInputStream bis = null;
+
+		OutputStream os = null; 
+
+		try {
+			os = response.getOutputStream();
+			fis = new FileInputStream(file);
+			bis = new BufferedInputStream(fis);
+			int i = bis.read(buffer);
+			while (i != -1) {
+				os.write(buffer, 0, buffer.length);
+				os.flush();
+				i = bis.read(buffer);
+			}
+		} catch (Exception e) {
+			logger.error(e, "文件[{}]下载过程中出错...!", filePath);
+		} finally {
+			if (bis != null) {
+				try {
+					bis.close();
+				} catch (IOException e) {
+					logger.warn(e);
+				}
+			}
+			if (fis != null) {
+				try {
+					fis.close();
+				} catch (IOException e) {
+					logger.warn(e);
+				}
+			}
+		}
+		
 	}
 }

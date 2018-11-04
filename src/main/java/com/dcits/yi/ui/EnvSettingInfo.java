@@ -1,5 +1,6 @@
 package com.dcits.yi.ui;
 
+import java.io.File;
 import java.util.Collection;
 
 import com.dcits.yi.tool.TestKit;
@@ -73,7 +74,14 @@ public class EnvSettingInfo {
 	 */
 	private String cronExpression;
 	
+	/**
+	 * 存储测试报告数据的轻量级数据库，路径
+	 */
+	private String sqlitePath;
 	
+	public EnvSettingInfo() {
+		super();
+	}
 
 	public EnvSettingInfo(Props props) {
 		super();
@@ -103,6 +111,8 @@ public class EnvSettingInfo {
 		
 		firefoxBinPath = props.getStr("firefox.bin.path", "");
 		
+		sqlitePath = TestKit.getStrIsNotEmpty(props, "sqlite_path", TestKit.getProjectRootPath() + File.separator + "report.db");
+		
 		if (!EnvSettingInfo.DEV_MODE) {
 			elementFolder =  TestKit.getProjectRootPath() + "/config/element/";
 			suiteFolder =  TestKit.getProjectRootPath() + "/config/suite/";
@@ -119,6 +129,14 @@ public class EnvSettingInfo {
 		if (StrUtil.isNotEmpty(firefoxBinPath)) System.setProperty("webdriver.firefox.bin", firefoxBinPath);
 	}
 
+	public void setSqlitePath(String sqlitePath) {
+		this.sqlitePath = sqlitePath;
+	}
+	
+	public String getSqlitePath() {
+		return sqlitePath;
+	}
+	
 	public void setCronEnabled(boolean cronEnabled) {
 		this.cronEnabled = cronEnabled;
 	}

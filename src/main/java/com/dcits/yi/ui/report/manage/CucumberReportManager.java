@@ -16,13 +16,22 @@ import cn.hutool.json.JSONUtil;
 public class CucumberReportManager implements IReportManager {
 
 	@Override
-	public void create(SuiteReport reportData) {
+	public String manage(SuiteReport reportData) {
 		// TODO Auto-generated method stub
 		String json = JSONUtil.parse(reportData).toString();
 		String report = FileUtil.readString(TestKit.getProjectRootPath() + "/template/webReport.xml", "utf-8");
 		
 		report = report.replace("#JSON_STRING__JSON_STRING#", json);
-		FileUtil.writeString(report, GlobalTestConfig.ENV_INFO.getReportFolder() + "/" + reportData.getReportName() + ".html", "utf-8");	
+		String reportPath = createReportPath(reportData.getReportName());
+		
+		FileUtil.writeString(report, reportPath, "utf-8");
+		
+		return reportPath;
+		
 	}
 
+	@Override
+	public String createReportPath(String reportName) {		
+		return GlobalTestConfig.ENV_INFO.getReportFolder() + "/" + reportName + ".html";
+	}
 }

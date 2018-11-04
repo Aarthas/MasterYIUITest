@@ -4,7 +4,7 @@
 
 	<groupId>com.dcits</groupId>
 	<artifactId>MasterYIUITest</artifactId>
-	<version>0.2.0beta</version>
+	<version>0.3.2beta</version>
 	<packaging>jar</packaging>
 
 	<name>MasterYIUITest</name>
@@ -89,15 +89,7 @@
 		    <groupId>org.apache.poi</groupId>
 		    <artifactId>poi-ooxml</artifactId>
 		    <version>${poi.version}</version>
-		</dependency>
-		
-		<!-- https://mvnrepository.com/artifact/org.freemarker/freemarker -->
-		<!-- <dependency>
-		    <groupId>org.freemarker</groupId>
-		    <artifactId>freemarker</artifactId>
-		    <version>2.3.28</version>
-		    <scope>test</scope>
-		</dependency> -->
+		</dependency>		
 		
 		<!-- 邮件 -->
 		<dependency>
@@ -105,6 +97,13 @@
 		    <artifactId>mail</artifactId>
 		    <version>1.4.7</version>
 		</dependency>
+		
+		<dependency>
+		    <groupId>sqlitejdbc</groupId>
+		    <artifactId>sqlitejdbc</artifactId>
+		    <version>0.5.6</version>
+		</dependency>
+				
 		
 		<!-- spring boot -->
 	  	<dependency>
@@ -129,6 +128,24 @@
 		    <artifactId>junit</artifactId>
 		    <scope>test</scope>
 		</dependency> -->
+		
+		<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-freemarker</artifactId>
+        </dependency>
+
+		<dependency>
+		    <groupId>org.freemarker</groupId>
+		    <artifactId>freemarker</artifactId>
+		    <version>2.3.28</version>
+		</dependency>
+
+		<dependency>
+	      <groupId>com.alibaba</groupId>
+	      <artifactId>fastjson</artifactId>
+	      <version>1.2.31</version>
+	    </dependency>
+		
 	</dependencies>
 
 

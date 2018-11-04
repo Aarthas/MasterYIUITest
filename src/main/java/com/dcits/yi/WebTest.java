@@ -71,7 +71,7 @@ public class WebTest {
 	 */
 	private Map<String, List<ExecuteCaseModel>> tagCases = new HashMap<String, List<ExecuteCaseModel>>();
 	
-	private List<IReportManager> reportManagers = new ArrayList<IReportManager>();
+	private Set<IReportManager> reportManagers = CollUtil.newLinkedHashSet();
 	
 	private static Object lock = new Object();
 	
@@ -226,7 +226,7 @@ public class WebTest {
 		for (IReportManager r:reportManagers) {
 			logger.info("正在执行报告处理器 [{}]...", r.getClass().getName());
 			try {
-				r.create(GlobalTestConfig.report);
+				r.manage(GlobalTestConfig.report);
 				logger.info("报告处理器 [{}]执行成功!", r.getClass().getName());
 			} catch (Exception e) {
 				// TODO: handle exception
@@ -265,6 +265,8 @@ public class WebTest {
 					//跳过执行
 					testCounts[3].incrementAndGet();					
 				} else {
+					GlobalTestConfig.report.getBrowserName().add(browserName);
+					
 					testCounts[0].incrementAndGet();
 					try {
 						GlobalTestConfig.getTestRunningObject().setDriver(browserName);
@@ -474,7 +476,7 @@ public class WebTest {
 		return browserType;
 	}
 
-	public List<IReportManager> getReportManagers() {
+	public Set<IReportManager> getReportManagers() {
 		return reportManagers;
 	}
 	
