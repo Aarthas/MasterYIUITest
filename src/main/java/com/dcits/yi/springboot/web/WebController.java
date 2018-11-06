@@ -1,10 +1,5 @@
 package com.dcits.yi.springboot.web;
 
-import java.io.BufferedInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.util.List;
 import java.util.Map;
 
@@ -78,13 +73,9 @@ public class WebController {
 			return JSONUtil.parse(json).toString();
 		}
 		
-		if (managerClassName.indexOf(".") == -1) {
-			managerClassName = "com.dcits.yi.ui.report.manage." + managerClassName;
-		}
-		
 		String filePath = null;
 		try {
-			IReportManager reportManger = ReflectUtil.newInstance(managerClassName);
+			IReportManager reportManger = TestKit.parseReportManager(managerClassName);
 			filePath = reportManger.manage(report);
 		} catch (Exception e) {
 			logger.error(e, "执行测试报告处理器[{}]失败！", managerClassName);

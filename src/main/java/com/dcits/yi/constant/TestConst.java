@@ -15,6 +15,8 @@ public class TestConst {
 	public static final String BROWSER_FIREFOX = "firefox";
 	public static final String BROWSER_OPERA = "opera";
 	public static final String BROWSER_HTMLUNIT = "htmlunit";
+	
+	public static final String REPORT_MANAGER_PACKAGE = "com.dcits.yi.ui.report.manage.";
 		
 	/**
 	 * 对应操作的中文释义，主要在日志记录和报告中使用，只有在此定义的方法名在执行过程中才会当成单个测试步骤进行报告记录

@@ -18,9 +18,48 @@ import cn.hutool.json.JSONObject;
  *
  */
 public class ZTestReportManager implements IReportManager {
+	
+	/**
+	 * 此处的name和age无任何作用，只是为了演示用
+	 */
+	private String name;
+	private int age;
+
+	public ZTestReportManager() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * 该构造函数实际无用，只是为了演示
+	 * @param name
+	 * @param age
+	 */
+	public ZTestReportManager(String name, int age) {
+		super();
+		this.name = name;
+		this.age = age;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public int getAge() {
+		return age;
+	}
+
+	public void setAge(int age) {
+		this.age = age;
+	}
 
 	@Override
 	public String manage(SuiteReport reportData) {
+		
 		JSONObject report = new JSONObject();
 		report.put("testPass", reportData.getSuccessCount());
 		report.put("testName", reportData.getTitle());

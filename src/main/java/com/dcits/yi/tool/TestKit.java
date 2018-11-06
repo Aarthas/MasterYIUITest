@@ -11,7 +11,13 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.yaml.snakeyaml.Yaml;
 
+import com.dcits.yi.constant.TestConst;
+import com.dcits.yi.ui.report.manage.IReportManager;
+
 import cn.hutool.core.io.file.FileReader;
+import cn.hutool.core.util.NumberUtil;
+import cn.hutool.core.util.ReUtil;
+import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.log.Log;
 import cn.hutool.log.LogFactory;
@@ -102,6 +108,65 @@ public class TestKit {
 		return StrUtil.isBlank(v) ? defaultValue : v;
 	}
 	
+	/**
+	 * 根据测试报告处理的类名或者全类名来实例化处理器对象
+	 * @param classname  ZTestReportManager 或者 ZTestReportManager('namessd', 22)
+	 * @return
+	 * @throws Exception
+	 */
+	public static IReportManager parseReportManager(String classname) throws Exception {
+		IReportManager manager = null;
+		Object[] arguments = null;
+		//判断是否有参数
+		if (classname.indexOf("(") > 0 && classname.indexOf(")") == (classname.length() - 1)) {
+			String parameters = classname.substring(classname.indexOf("(") + 1, classname.length() - 1);
+			classname = classname.substring(0, classname.indexOf("("));
+			
+			//解析出参数
+			String[] parameter = parameters.split(",");
+			arguments = new Object[parameter.length];
+			for (int i = 0;i < parameter.length;i++) {
+				arguments[i] = parameter[i].trim();
+				String newS = ReUtil.get("['\"“](.*)[\"'”]", arguments[i].toString(), 1);
+				if (StrUtil.isNotEmpty(newS)) {
+					arguments[i] = newS.trim();
+				} else {
+					if (NumberUtil.isDouble(arguments[i].toString())) {
+						arguments[i] = Double.valueOf(arguments[i].toString());
+					}
+					if (NumberUtil.isInteger(arguments[i].toString())) {
+						arguments[i] = Integer.valueOf(arguments[i].toString());
+					}
+					if (arguments[i].toString().matches("true|false")) {
+						arguments[i] = Boolean.valueOf(arguments[i].toString());
+					}
+				}
+			}
+		}
+		
+		//判断是否为全类名
+		if (classname.indexOf(".") == -1) {
+			classname = TestConst.REPORT_MANAGER_PACKAGE + classname;
+		}		
+		
+		if (IReportManager.class.isAssignableFrom(Class.forName(classname)) ) {
+			try {
+				manager = (IReportManager) ReflectUtil.newInstance(Class.forName(classname), arguments);
+			} catch (Exception e) {
+				logger.warn(e, "[{}({})]带参构造函数实例化失败!", classname, StrUtil.join(",", arguments));
+				manager = (IReportManager) ReflectUtil.newInstance(Class.forName(classname));
+			}
+			
+		}
+		return manager;
+	}
+	
+	/**
+	 * 渲染下载
+	 * @param response
+	 * @param filePath
+	 * @param fileName
+	 */
 	public static void renderDownload(HttpServletResponse response, String filePath, String fileName) {
 		response.setContentType("application/octet-stream");
 		response.setHeader("Content-Disposition", "attachment;fileName=" + fileName);

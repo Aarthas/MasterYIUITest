@@ -9,8 +9,9 @@ failInterrupt: false
 tag: default
 
 # 指定测试报告处理器，测试结束之后将会按顺序执行
-reportManager: 
-  - com.dcits.yi.ui.report.manage.ZTestReportManager
+reportManager:
+  # 可用使用类名或者全类名，支持带参数，字符串请加单双引号 
+  - ZTestReportManager('namessd', 22)
 
 # 测试用例组
 cases:
@@ -21,11 +22,11 @@ cases:
     tag: 2
     failInterrupt: true
     # browserType: [chrome, ie, firefox]
-    browserType: ie
+    browserType: chrome
   
   - name: 百度搜索
     method: com.dcits.test.baidu.usecase.Baidu.search
-    enabled: true
+    enabled: false
     tag: 3
     failInterrupt: true
     browserType: [chrome, firefox]

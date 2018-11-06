@@ -341,12 +341,12 @@ public class WebTest {
 			if (reportManagerClass != null && reportManagerClass.size() > 0) {
 				for (String s:reportManagerClass) {
 					try {
-						if (IReportManager.class.isAssignableFrom(Class.forName(s)) ) {
-							reportManagers.add(ReflectUtil.newInstance(s));
-						}						
+						IReportManager m = TestKit.parseReportManager(s);
+						if (m != null) {
+							reportManagers.add(m);
+						}
 					} catch (Exception e) {
-						// TODO: handle exception
-						logger.info("测试报告处理器[{}]实例化失败,请检查！", s);
+						logger.warn(e, "测试报告处理器[{}]实例化失败,请检查！", s);
 					}
 				}
 			}
