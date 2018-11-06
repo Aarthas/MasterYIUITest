@@ -1,7 +1,7 @@
 # MasterYI UI Test Framework
 易大师UI自动化测试框架
 
- **_当前版本：0.3.2beta_** 
+ **_当前版本：0.3.3beta_** 
 
 码云地址：https://gitee.com/xuwangcheng/MasterYI-UI-Test-Framework  
 更新日志: [易大师UI自动化测试框架-更新日志](https://gitee.com/xuwangcheng/MasterYI-UI-Test-Framework/wikis/pages?title=%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97&parent=)  
@@ -20,7 +20,8 @@
 - [yaml文件定义元素信息，方便阅读、编写和维护](https://gitee.com/xuwangcheng/MasterYI-UI-Test-Framework/wikis/pages?title=%E5%85%83%E7%B4%A0%E5%AE%9A%E4%B9%89&parent=%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E)；  
 - [基于PageModel模型编写测试业务代码，代码复用性高、易理解，灵活](https://gitee.com/xuwangcheng/MasterYI-UI-Test-Framework/wikis/pages?title=PageModel%E7%B1%BB&parent=%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E);  
 - [使用数据工厂生产测试数据，分离业务代码和测试数据](https://gitee.com/xuwangcheng/MasterYI-UI-Test-Framework/wikis/pages?title=%E6%95%B0%E6%8D%AE%E6%A8%A1%E5%9E%8B%EF%BC%88%E6%B5%8B%E8%AF%95%E6%95%B0%E6%8D%AE%E7%94%9F%E6%88%90%EF%BC%89&parent=%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E)；
-- [默认实现了多款不同的测试报告模板，用户可实现自定义的报告处理器](https://gitee.com/xuwangcheng/MasterYI-UI-Test-Framework/wikis/pages?title=%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A%E5%A4%84%E7%90%86%E5%99%A8&parent=%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E)；
+- [默认实现了多款不同的测试报告处理器，用户可实现自定义的报告处理器](https://gitee.com/xuwangcheng/MasterYI-UI-Test-Framework/wikis/pages?title=%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A%E5%A4%84%E7%90%86%E5%99%A8&parent=%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E)；
+- 使用yaml定义测试集（测试套件）信息，可组合使用不同测试用例方法，可指定测试报告处理器（可带参数）等；
 - [邮件推送测试结果和测试报告附件](https://gitee.com/xuwangcheng/MasterYI-UI-Test-Framework/wikis/pages?title=%E6%B5%8B%E8%AF%95%E6%8A%A5%E5%91%8A%E5%A4%84%E7%90%86%E5%99%A8&parent=%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E)；
 - [分布式执行](https://gitee.com/xuwangcheng/MasterYI-UI-Test-Framework/wikis/pages?title=%E5%88%86%E5%B8%83%E5%BC%8F%E6%89%A7%E8%A1%8C&parent=%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E)；
 - [内置定时执行器](https://gitee.com/xuwangcheng/MasterYI-UI-Test-Framework/wikis/pages?title=%E5%AE%9A%E6%97%B6%E6%B5%8B%E8%AF%95%E4%BB%BB%E5%8A%A1&parent=%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E)；
