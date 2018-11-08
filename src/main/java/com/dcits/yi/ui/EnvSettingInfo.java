@@ -3,6 +3,7 @@ package com.dcits.yi.ui;
 import java.io.File;
 import java.util.Collection;
 
+import com.dcits.yi.constant.TestConst;
 import com.dcits.yi.tool.TestKit;
 
 import cn.hutool.core.collection.CollUtil;
@@ -19,6 +20,8 @@ import cn.hutool.setting.dialect.Props;
 public class EnvSettingInfo {
 	
 	public static boolean DEV_MODE = true;
+
+	private String driverBinSuffix = TestKit.getOsName().equals("win") ? ".exe" : "";
 	
 	private boolean remoteMode;
 	
@@ -30,10 +33,10 @@ public class EnvSettingInfo {
 	private String elementFolder = TestKit.getProjectRootPath() + "/config/element/";
 	private String suiteFolder = TestKit.getProjectRootPath() + "/config/suite/";
 	
-	private String chromeDriverPath = TestKit.getProjectRootPath() + "/src/main/resources/chromedriver.exe";
-	private String ieDriverPath = TestKit.getProjectRootPath() + "/src/main/resources/IEDriverServer.exe";
-	private String operaDriverPath = TestKit.getProjectRootPath() + "/src/main/resources/operadriver.exe";
-	private String firefoxDriverPath = TestKit.getProjectRootPath() + "/src/main/resources/geckodriver.exe";
+	private String chromeDriverPath = TestKit.getProjectRootPath() + "/src/main/resources/chromedriver" + driverBinSuffix;
+	private String ieDriverPath = TestKit.getProjectRootPath() + "/src/main/resources/IEDriverServer" + driverBinSuffix;
+	private String operaDriverPath = TestKit.getProjectRootPath() + "/src/main/resources/operadriver" + driverBinSuffix;
+	private String firefoxDriverPath = TestKit.getProjectRootPath() + "/src/main/resources/geckodriver" + driverBinSuffix;
 	
 	private String firefoxBinPath = "";
 	
@@ -116,10 +119,10 @@ public class EnvSettingInfo {
 		if (!EnvSettingInfo.DEV_MODE) {
 			elementFolder =  TestKit.getProjectRootPath() + "/config/element/";
 			suiteFolder =  TestKit.getProjectRootPath() + "/config/suite/";
-			chromeDriverPath = TestKit.getProjectRootPath() + "/drivers/chromedriver.exe";
-			ieDriverPath = TestKit.getProjectRootPath() + "/drivers/IEDriverServer.exe";
-			operaDriverPath = TestKit.getProjectRootPath() + "/drivers/operadriver.exe";
-			firefoxDriverPath = TestKit.getProjectRootPath() + "/drivers/geckodriver.exe";
+			chromeDriverPath = TestKit.getProjectRootPath() + "/drivers/chromedriver" + driverBinSuffix;
+			ieDriverPath = TestKit.getProjectRootPath() + "/drivers/IEDriverServer" + driverBinSuffix;
+			operaDriverPath = TestKit.getProjectRootPath() + "/drivers/operadriver" + driverBinSuffix;
+			firefoxDriverPath = TestKit.getProjectRootPath() + "/drivers/geckodriver" + driverBinSuffix;
 		}
 		
 		if (StrUtil.isNotEmpty(chromeDriverPath)) System.setProperty("webdriver.chrome.driver", chromeDriverPath);
@@ -128,6 +131,7 @@ public class EnvSettingInfo {
 		if (StrUtil.isNotEmpty(operaDriverPath)) System.setProperty("webdriver.opera.driver", operaDriverPath);	
 		if (StrUtil.isNotEmpty(firefoxBinPath)) System.setProperty("webdriver.firefox.bin", firefoxBinPath);
 	}
+
 
 	public void setSqlitePath(String sqlitePath) {
 		this.sqlitePath = sqlitePath;

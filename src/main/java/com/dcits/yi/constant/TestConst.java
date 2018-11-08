@@ -1,5 +1,8 @@
 package com.dcits.yi.constant;
 
+import com.dcits.yi.tool.TestKit;
+import org.apache.logging.log4j.core.config.plugins.util.ResolverUtil;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -10,6 +13,7 @@ import java.util.Map;
  *
  */
 public class TestConst {
+
 	public static final String BROWSER_CHROME = "chrome";
 	public static final String BROWSER_IE = "ie";
 	public static final String BROWSER_FIREFOX = "firefox";

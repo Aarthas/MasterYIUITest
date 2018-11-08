@@ -29,5 +29,8 @@ logs/
 .project
 .classpath
 
-更新说明
+锟斤拷锟斤拷说锟斤拷
 report.db
+
+.idea/
+*.iml

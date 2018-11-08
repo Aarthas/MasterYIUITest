@@ -3,6 +3,7 @@ package com.dcits.yi.ui.driver;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+import com.dcits.yi.tool.TestKit;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -29,7 +30,7 @@ public class SeleniumDriver {
 	private static final Log logger = LogFactory.get();
 
 	public static WebDriver initWebDriver(String browserName) throws MalformedURLException {
-		logger.info("初始化指定类型的WebDriver[{}]", browserName);
+		logger.info("初始化指定类型的WebDriver[{} for {}]", browserName, TestKit.getOsName());
 		WebDriver driver = null;
 		if (GlobalTestConfig.ENV_INFO.isRemoteMode()) {	//是否分布式执行	
 			driver = initRemoteDriver(browserName);

@@ -1,3 +1,5 @@
+Windows版本
+
 chromedriver=v2.40 对应chrome版本为v66-68
 chromeDriver下载地址：http://npm.taobao.org/mirrors/chromedriver/
 chrome下载地址： https://www.chromedownloads.net/
@@ -10,5 +12,13 @@ iedriver下载地址：http://selenium-release.storage.googleapis.com/index.html
 
 operadriver由于用的人比较少，暂时没有放进来
 
-firefox为最新版64位，https://github.com/mozilla/geckodriver/releases/也可以自行下载
+firefox为最新版64位 v0.23.0，https://github.com/mozilla/geckodriver/releases/也可以自行下载
 如果启动失败，尝试更新下firefox的版本
+
+
+++++++++++++++++++++++++++++++++++++++++++++++++++
+MacOs版本
+Chromedriver = v2.42 ,对应chrome版本为v70以上
+geckodriver = v0.23.0
+
+其他驱动请根据需要自行添加

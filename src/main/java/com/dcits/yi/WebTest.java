@@ -243,7 +243,7 @@ public class WebTest {
 		for (String key:GlobalTestConfig.getTestRunningObject().getDrivers().keySet()) {
 			WebDriver driver = GlobalTestConfig.getTestRunningObject().getDrivers().get(key);
 			if (driver != null) {
-				logger.info("关闭webdriver[" + key + "]");
+				logger.info("关闭webdriver[{} for {}]", key, TestKit.getOsName());
 				driver.quit();
 			}
 		}
@@ -271,7 +271,7 @@ public class WebTest {
 					try {
 						GlobalTestConfig.getTestRunningObject().setDriver(browserName);
 					} catch (Exception e) {
-						logger.error(e, "获取WebDriver[{}]出错！", browserName);
+						logger.error(e, "获取WebDriver[{} for {}]出错！", browserName, TestKit.getOsName());
 						testCounts[3].incrementAndGet();
 						continue;
 					}					

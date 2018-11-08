@@ -51,6 +51,19 @@ public class TestKit {
 		}
 		return projectRootPath;
 	}
+
+	/**
+	 * 获取操作系统名称
+	 * @return
+	 */
+	public static String getOsName(){
+		if (System.getProperty("os.name").toLowerCase().startsWith("win")) {
+			return "win";
+		}
+
+
+		return "mac";
+	}
 	
 	/**
 	 * 获取class根路径

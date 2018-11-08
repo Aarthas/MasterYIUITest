@@ -1,6 +1,8 @@
 package common;
 
 import com.dcits.yi.WebTest;
+import org.junit.Test;
+import org.openqa.selenium.chrome.ChromeDriver;
 
 
 public class CommonTest {
@@ -26,5 +28,18 @@ public class CommonTest {
 		
 		//启动spring-boot-web，可以调用api获取一些信息或者启动测试
 		//SpringApplication.run(Application.class);
+	}
+
+	@Test
+	public void common() {
+		ChromeDriver driver = new ChromeDriver();
+
+		driver.get("http://www.baidu.com");
+		try {
+			Thread.sleep(5000);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+		driver.quit();
 	}
 }
