@@ -33,6 +33,7 @@ import cn.hutool.core.convert.Convert;
 import cn.hutool.core.convert.ConverterRegistry;
 import cn.hutool.core.date.DateUtil;
 import cn.hutool.core.date.TimeInterval;
+import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.thread.ThreadUtil;
 import cn.hutool.core.util.ArrayUtil;
@@ -239,7 +240,8 @@ public class WebTest {
 	/**
 	 * 测试结束清理环境
 	 */
-	public void clean() {			
+	public void clean() {	
+		//关闭WebDriver
 		for (String key:GlobalTestConfig.getTestRunningObject().getDrivers().keySet()) {
 			WebDriver driver = GlobalTestConfig.getTestRunningObject().getDrivers().get(key);
 			if (driver != null) {
@@ -247,6 +249,10 @@ public class WebTest {
 				driver.quit();
 			}
 		}
+		
+		//清理temp文件夹		
+		FileUtil.clean(TestConst.TEST_TEMP_FLODER);
+		logger.info("清理temp文件夹[{}]成功!", TestConst.TEST_TEMP_FLODER);
 	}
 	
 	/**

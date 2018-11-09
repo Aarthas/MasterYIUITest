@@ -3,7 +3,6 @@ package com.dcits.yi.ui;
 import java.io.File;
 import java.util.Collection;
 
-import com.dcits.yi.constant.TestConst;
 import com.dcits.yi.tool.TestKit;
 
 import cn.hutool.core.collection.CollUtil;
@@ -131,8 +130,7 @@ public class EnvSettingInfo {
 		if (StrUtil.isNotEmpty(operaDriverPath)) System.setProperty("webdriver.opera.driver", operaDriverPath);	
 		if (StrUtil.isNotEmpty(firefoxBinPath)) System.setProperty("webdriver.firefox.bin", firefoxBinPath);
 	}
-
-
+	
 	public void setSqlitePath(String sqlitePath) {
 		this.sqlitePath = sqlitePath;
 	}

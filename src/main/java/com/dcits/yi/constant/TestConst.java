@@ -1,10 +1,9 @@
 package com.dcits.yi.constant;
 
-import com.dcits.yi.tool.TestKit;
-import org.apache.logging.log4j.core.config.plugins.util.ResolverUtil;
-
 import java.util.HashMap;
 import java.util.Map;
+
+import com.dcits.yi.tool.TestKit;
 
 /**
  * 框架常量
@@ -14,6 +13,8 @@ import java.util.Map;
  */
 public class TestConst {
 
+	public static final String TEST_TEMP_FLODER = TestKit.getProjectRootPath() + "/temp";
+	
 	public static final String BROWSER_CHROME = "chrome";
 	public static final String BROWSER_IE = "ie";
 	public static final String BROWSER_FIREFOX = "firefox";

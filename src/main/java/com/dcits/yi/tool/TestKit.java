@@ -172,10 +172,10 @@ public class TestKit {
 			
 		}
 		return manager;
-	}
+	}	
 	
 	/**
-	 * 渲染下载
+	 * 渲染下载HttpServletResponse
 	 * @param response
 	 * @param filePath
 	 * @param fileName
