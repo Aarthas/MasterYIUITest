@@ -94,13 +94,13 @@ public class PageElement extends BaseObject implements IBaseElement {
 	}
 
 	@Override
-	public String OCRCode(int x, int y, String language) throws Exception {
+	public String OCRCode(int x, int y, String language) {
 		String result = null;
 		getEle();
 		Dimension eleSize = ele.getSize();
 		String capturePath = TestKit.getProjectRootPath() + BasePage.screenshot();
 		if (!FileUtil.exist(capturePath)) {
-			throw new Exception("无法获取到页面截图!");
+			throw new RuntimeException("无法获取到页面截图!");
 		}
 		try {
 			BufferedImage originalImage = ImageIO.read(new File(capturePath));
@@ -117,7 +117,7 @@ public class PageElement extends BaseObject implements IBaseElement {
 			result = instance.doOCR(imageFile);
 		} catch (Exception e) {
 			logger.error(e, "验证码识别出错!");
-			throw e;
+			throw new RuntimeException("验证码识别出错!", e);
 		}
 		
 		if (StrUtil.isNotEmpty(result)) {
@@ -130,7 +130,6 @@ public class PageElement extends BaseObject implements IBaseElement {
 	
 	@Override
 	public String getText() {
-		// TODO Auto-generated method stub
 		getEle();
 		String result = ele.getText();
 		getStepReport().setResult(result);		
@@ -139,7 +138,6 @@ public class PageElement extends BaseObject implements IBaseElement {
 
 	@Override
 	public String getAttributeValue(String attributeName) {
-		// TODO Auto-generated method stub
 		getEle();	
 		String result = ele.getAttribute(attributeName);
 		getStepReport().setResult(result);
@@ -148,7 +146,6 @@ public class PageElement extends BaseObject implements IBaseElement {
 
 	@Override
 	public String getTagName() {
-		// TODO Auto-generated method stub
 		getEle();
 		String result = ele.getTagName();
 		getStepReport().setResult(result);
@@ -163,7 +160,6 @@ public class PageElement extends BaseObject implements IBaseElement {
 
 	@Override
 	public void mouseRightClick() {
-		// TODO Auto-generated method stub
 		getEle();
 		new Actions(getDriver()).contextClick(ele).perform();
 		
@@ -171,14 +167,12 @@ public class PageElement extends BaseObject implements IBaseElement {
 
 	@Override
 	public void mouseDoubleClick() {
-		// TODO Auto-generated method stub
 		getEle();
 		new Actions(getDriver()).doubleClick(ele).perform();
 	}
 
 	@Override
 	public boolean isExist() {
-		// TODO Auto-generated method stub
 		getEle();
 		if (ele == null) {
 			return false;
@@ -272,7 +266,7 @@ public class PageElement extends BaseObject implements IBaseElement {
 
 	@Override
 	public String toString() {
-		return "PageElement [name=" + name + "]";
+		return "PageElement [locator=" + locator + ", name=" + name + "]";
 	}
 
 }

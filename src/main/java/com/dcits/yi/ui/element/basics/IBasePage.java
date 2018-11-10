@@ -75,4 +75,10 @@ public interface IBasePage {
 	 * @param js
 	 */
 	void executeScript(String js);
+	
+	/**
+	 * 使用AutoIt的脚本来实现上传
+	 * @param executeScriptExe 由AutoIt生成或编写上传文件自动化脚本执行程序
+	 */
+	void uploadByAutoIt(String executeScriptExe);
 }

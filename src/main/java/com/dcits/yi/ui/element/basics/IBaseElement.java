@@ -73,9 +73,9 @@ public interface IBaseElement {
 	/**
 	 * 
 	 * 	上传文件<br>
-	 * 	1、查找对应的插件位置，在input的标签对中输入文件所在位置使用sendkeys<br>
-	 * 	2、使用autoit等工具来实现
-	 * @param filePath
+	 * 	1、在input的标签对中输入文件所在位置使用sendkeys<br>
+	 * 	2、如果页面上传功能不是input实现的,可以参考使用autoit工具来实现上传 <a href="http://www.cnblogs.com/fnng/p/4188162.html">selenium借助AutoIt识别上传</a>
+	 * @param filePath 文件绝对路径
 	 */
 	void upload(String filePath);
 	
@@ -130,5 +130,5 @@ public interface IBaseElement {
 	 * @return
 	 * @throws Exception
 	 */
-	String OCRCode(int x, int y, String language) throws Exception ;
+	String OCRCode(int x, int y, String language);
 }

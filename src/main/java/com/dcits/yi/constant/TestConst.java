@@ -63,6 +63,8 @@ public class TestConst {
 		action_keyword.put("back", "由当前页面后退");
 		action_keyword.put("to", "跳转至");
 		
+		action_keyword.put("uploadByAutoIt", "使用AutoIt上传文件");
+		
 		action_keyword.put("dialogDismiss", "关闭弹出框");
 		action_keyword.put("dialogAccept", "确认弹出框");
 		action_keyword.put("getDialogText", "获取弹出框文本并确认");

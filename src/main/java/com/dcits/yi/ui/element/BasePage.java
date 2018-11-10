@@ -210,4 +210,15 @@ public class BasePage extends BaseObject implements IBasePage {
 	public void executeScript(String js) {
 		((JavascriptExecutor) getDriver()).executeScript(js);		
 	}
+
+	@Override
+	public void uploadByAutoIt(String executeScriptExe) {
+		try {
+			Process pro = Runtime.getRuntime().exec(executeScriptExe);
+			pro.waitFor();
+		} catch (Exception e) {
+			logger.error(e, "使用AutoIt上传文件出错[{}]", executeScriptExe);
+			throw new RuntimeException(StrUtil.format("使用AutoIt上传文件出错[{}]", executeScriptExe));
+		}
+	}
 }

@@ -221,4 +221,10 @@ public class Locator {
 	public int getPlaceholderParamsCount() {
 		return placeholderParamsCount;
 	}
+
+	@Override
+	public String toString() {
+		return "Locator [locationType=" + locationType + ", locationValue=" + locationValue + ", locationSeq="
+				+ locationSeq + "]";
+	}
 }

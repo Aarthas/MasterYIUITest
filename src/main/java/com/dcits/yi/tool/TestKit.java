@@ -5,7 +5,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.OutputStream;
-import java.math.BigDecimal;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
@@ -16,7 +15,6 @@ import com.dcits.yi.constant.TestConst;
 import com.dcits.yi.ui.report.manage.IReportManager;
 
 import cn.hutool.core.io.file.FileReader;
-import cn.hutool.core.math.MathUtil;
 import cn.hutool.core.util.NumberUtil;
 import cn.hutool.core.util.ReUtil;
 import cn.hutool.core.util.ReflectUtil;
@@ -224,7 +222,4 @@ public class TestKit {
 		
 	}
 	
-	public static int px2mm(int px) {
-		return NumberUtil.div(String.valueOf(px * 1000), "28", 0).intValue();
-	}
 }
