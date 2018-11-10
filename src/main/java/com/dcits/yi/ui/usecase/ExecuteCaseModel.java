@@ -77,9 +77,9 @@ public class ExecuteCaseModel {
 				Method m = methods.get(i);
 				m.invoke(targets.get(i));						
 			}				
-			logger.info("测试用例 {}[tag={}][broswerType={}] 执行成功!", name, tag, browserName);
+			logger.info("测试用例 [{}][tag={}][broswerType={}] 执行成功!", name, tag, browserName);
 		} catch (Exception e) {
-			logger.error(e, "执行用例{}[tag={}][broswerType={}] 失败!", name, tag, browserName);			
+			logger.error(e, "执行测试用例 [{}][tag={}][broswerType={}] 失败!", name, tag, browserName);			
 			this.successFlag = false;
 			GlobalTestConfig.getTestRunningObject().getStepReport().setStatus(false);			
 			r.setStatus("fail");

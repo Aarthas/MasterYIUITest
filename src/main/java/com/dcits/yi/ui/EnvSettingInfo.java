@@ -80,6 +80,10 @@ public class EnvSettingInfo {
 	 * 存储测试报告数据的轻量级数据库，路径
 	 */
 	private String sqlitePath;
+	/**
+	 * OCR识别软件的路径
+	 */
+	private String tesseractOCRPath;
 	
 	public EnvSettingInfo() {
 		super();
@@ -115,6 +119,8 @@ public class EnvSettingInfo {
 		
 		sqlitePath = TestKit.getStrIsNotEmpty(props, "sqlite_path", TestKit.getProjectRootPath() + File.separator + "report.db");
 		
+		tesseractOCRPath = props.getStr("tesseract_path", "");
+		
 		if (!EnvSettingInfo.DEV_MODE) {
 			elementFolder =  TestKit.getProjectRootPath() + "/config/element/";
 			suiteFolder =  TestKit.getProjectRootPath() + "/config/suite/";
@@ -129,6 +135,14 @@ public class EnvSettingInfo {
 		if (StrUtil.isNotEmpty(firefoxDriverPath)) System.setProperty("webdriver.gecko.driver", firefoxDriverPath);
 		if (StrUtil.isNotEmpty(operaDriverPath)) System.setProperty("webdriver.opera.driver", operaDriverPath);	
 		if (StrUtil.isNotEmpty(firefoxBinPath)) System.setProperty("webdriver.firefox.bin", firefoxBinPath);
+	}
+	
+	public void setTesseractOCRPath(String tesseractOCRPath) {
+		this.tesseractOCRPath = tesseractOCRPath;
+	}
+	
+	public String getTesseractOCRPath() {
+		return tesseractOCRPath;
 	}
 	
 	public void setSqlitePath(String sqlitePath) {
@@ -301,13 +315,15 @@ public class EnvSettingInfo {
 
 	@Override
 	public String toString() {
-		return "EnvSettingInfo [remoteMode=" + remoteMode + ", hubRemoteUrl=" + hubRemoteUrl + ", reportFolder="
-				+ reportFolder + ", screenshotFolder=" + screenshotFolder + ", elementFolder=" + elementFolder
-				+ ", suiteFolder=" + suiteFolder + ", chromeDriverPath=" + chromeDriverPath + ", ieDriverPath="
-				+ ieDriverPath + ", operaDriverPath=" + operaDriverPath + ", firefoxDriverPath=" + firefoxDriverPath
+		return "EnvSettingInfo [driverBinSuffix=" + driverBinSuffix + ", remoteMode=" + remoteMode + ", hubRemoteUrl="
+				+ hubRemoteUrl + ", reportFolder=" + reportFolder + ", screenshotFolder=" + screenshotFolder
+				+ ", elementFolder=" + elementFolder + ", suiteFolder=" + suiteFolder + ", chromeDriverPath="
+				+ chromeDriverPath + ", ieDriverPath=" + ieDriverPath + ", operaDriverPath=" + operaDriverPath
+				+ ", firefoxDriverPath=" + firefoxDriverPath + ", firefoxBinPath=" + firefoxBinPath
 				+ ", defaultSleepSeconds=" + defaultSleepSeconds + ", elementLocationRetryCount="
 				+ elementLocationRetryCount + ", elementLocationTimeouts=" + elementLocationTimeouts + ", mailAccount="
 				+ mailAccount + ", tos=" + tos + ", ccs=" + ccs + ", bccs=" + bccs + ", cronEnabled=" + cronEnabled
-				+ ", cronSuite=" + cronSuite + ", cronExpression=" + cronExpression + "]";
+				+ ", cronSuite=" + cronSuite + ", cronExpression=" + cronExpression + ", sqlitePath=" + sqlitePath
+				+ ", tesseractOCRPath=" + tesseractOCRPath + "]";
 	}
 }

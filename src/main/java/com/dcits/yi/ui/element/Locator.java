@@ -31,7 +31,7 @@ public class Locator {
 	private static final Log logger = LogFactory.get();
 	
 	/**
-	 * frame元素的名称
+	 * 元素的名称
 	 */
 	private String name;
 	/**
@@ -51,7 +51,7 @@ public class Locator {
 	 */
 	private int placeholderParamsCount = 0;
 	/**
-	 * 该元素所在frame的定位器集合
+	 * 该元素所在frame的定位器集合,嵌套frame按照顺序
 	 */
 	private List<Locator> frameLocators = new ArrayList<Locator>();
 	
@@ -64,7 +64,6 @@ public class Locator {
 
 	public Locator() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	
 	public Locator(String name, String info, Map elementMap) {
@@ -81,6 +80,7 @@ public class Locator {
 		this.name = name;
 		locationType = infos[0];
 		locationValue = infos[1];
+		//xpath最后面如果有中括号为xpath路径自带
 		if (!"xpath".equalsIgnoreCase(locationType) && locationValue.endsWith("]")) {
 			String seq = locationValue.substring(locationValue.indexOf("[") + 1, locationValue.indexOf("]"));
 			if (NumberUtil.isInteger(seq)) {
@@ -106,7 +106,7 @@ public class Locator {
 	}
 
 	/**
-	   *     获取元素，如果在指定时间内N次都没有获取到，则报错，默认次数为2
+	 * 获取元素，如果在指定时间内N次都没有获取到，则报错，默认次数为2
 	 * @param driver
 	 * @return
 	 * @throws Exception
@@ -163,6 +163,11 @@ public class Locator {
 		}
 	}
 	
+	/**
+	 * 通过反射获取指定类型的By实例
+	 * @return
+	 * @throws Exception
+	 */
 	private By getBy() throws Exception {
 		Class clz = Class.forName("org.openqa.selenium.By$By" + BaseObject.location_Types.get(locationType.toLowerCase().trim()));
 		Constructor ctr = clz.getConstructor(String.class);

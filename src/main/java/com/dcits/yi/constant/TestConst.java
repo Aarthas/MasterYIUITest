@@ -13,22 +13,28 @@ import com.dcits.yi.tool.TestKit;
  */
 public class TestConst {
 
+	/**
+	 * 测试缓存文件夹
+	 */
 	public static final String TEST_TEMP_FLODER = TestKit.getProjectRootPath() + "/temp";
 	
+	//浏览器类型
 	public static final String BROWSER_CHROME = "chrome";
 	public static final String BROWSER_IE = "ie";
 	public static final String BROWSER_FIREFOX = "firefox";
 	public static final String BROWSER_OPERA = "opera";
 	public static final String BROWSER_HTMLUNIT = "htmlunit";
 	
+	/**
+	 * 测试报告处理器的默认包路径
+	 */
 	public static final String REPORT_MANAGER_PACKAGE = "com.dcits.yi.ui.report.manage.";
 		
 	/**
-	 * 对应操作的中文释义，主要在日志记录和报告中使用，只有在此定义的方法名在执行过程中才会当成单个测试步骤进行报告记录
+	 * 对应操作的中文释义，主要在日志记录和报告中使用，只有在此定义的方法名在执行过程中才会当成单个测试步骤进行报告记录<br>
+	 * 并且再此定义的操作也会在前置后置过程中做一些其他的操作
 	 */
 	public static final Map<String, String> action_keyword = new HashMap<String, String>();
-
-	public static final String DEFAULT_FRAME_NAME = "masterYiFrame";
 	
 	static {
 		action_keyword.put("getText", "获取元素文本");
@@ -66,5 +72,12 @@ public class TestConst {
 		action_keyword.put("selectByOption", "根据文本值选择下拉");
 		action_keyword.put("getSelectedValue", "获取当前选中内容");
 		action_keyword.put("getAllOptions", "获取全部下拉内容");
+		
+		action_keyword.put("OCRCode", "验证码识别");
 	}
+	
+	/**
+	 * 默认的frame名称
+	 */
+	public static final String DEFAULT_FRAME_NAME = "masterYiFrame";
 }

@@ -1,19 +1,31 @@
 package com.dcits.yi.ui.element;
 
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.imageio.ImageIO;
+
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.ui.Select;
 
+import com.dcits.yi.constant.TestConst;
+import com.dcits.yi.tool.TestKit;
 import com.dcits.yi.ui.GlobalTestConfig;
 import com.dcits.yi.ui.element.basics.IBaseElement;
 
+import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.text.StrFormatter;
+import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.log.Log;
 import cn.hutool.log.LogFactory;
+import net.sourceforge.tess4j.ITesseract;
+import net.sourceforge.tess4j.Tesseract;
+import net.sourceforge.tess4j.util.ImageHelper;
 
 /**
  * 元素对象基类
@@ -49,11 +61,11 @@ public class PageElement extends BaseObject implements IBaseElement {
 	 * 传入替换占位符的参数
 	 * @param params
 	 */
-	public void setParams(Object... params) {
-		if (locator.getPlaceholderParamsCount() < 1) {
-			return;
-		}		
-		locator.setLocationValue(StrUtil.format(locator.getLocationValue(), params));
+	public PageElement setParams(Object... params) {
+		if (locator.getPlaceholderParamsCount() >= 1) {
+			locator.setLocationValue(StrUtil.format(locator.getLocationValue(), params));
+		}				
+		return this;
 	}
 	
 	/**
@@ -70,7 +82,8 @@ public class PageElement extends BaseObject implements IBaseElement {
 			ele = locator.getElement(getDriver());			
 		} catch (Exception e) {
 			// TODO: handle exception
-			logger.error("无法定位到元素 [{}][{} => {}],  当前Frame：{}", getName(), locator.getLocationType(), locator.getLocationValue()
+			logger.error("无法定位到元素 [{}][{} => {}{}],  当前Frame：{}", getName(), locator.getLocationType(), locator.getLocationValue()
+					, (locator.getLocationSeq() > 0 ? "[" + locator.getLocationSeq() + "]" : "")
 					, GlobalTestConfig.getTestRunningObject().getCurrentFrameName());
 			getStepReport().setMark(StrFormatter.format("元素定位失败:{} => {}{}\n", locator.getLocationType(), locator.getLocationValue()
 					, (locator.getLocationSeq() > 0 ? "[" + locator.getLocationSeq() + "]" : "")));
@@ -80,7 +93,41 @@ public class PageElement extends BaseObject implements IBaseElement {
 		return ele;
 	}
 
-
+	@Override
+	public String OCRCode(int x, int y, String language) throws Exception {
+		String result = null;
+		getEle();
+		Dimension eleSize = ele.getSize();
+		String capturePath = TestKit.getProjectRootPath() + BasePage.screenshot();
+		if (!FileUtil.exist(capturePath)) {
+			throw new Exception("无法获取到页面截图!");
+		}
+		try {
+			BufferedImage originalImage = ImageIO.read(new File(capturePath));
+			BufferedImage croppedImage = originalImage.getSubimage(x, y, eleSize.getWidth(), eleSize.getHeight());
+			String tempImageName = IdUtil.fastUUID() + ".png";
+			ImageIO.write(ImageHelper.convertImageToBinary(croppedImage), "png", FileUtil.touch(TestConst.TEST_TEMP_FLODER + File.separator + tempImageName));
+			
+			File imageFile = new File(TestConst.TEST_TEMP_FLODER + File.separator + tempImageName);
+			
+			ITesseract instance = new Tesseract();
+			//tesseract-ocr目录
+			instance.setDatapath(GlobalTestConfig.ENV_INFO.getTesseractOCRPath() + File.separator  + "tessdata");
+			instance.setLanguage(language);
+			result = instance.doOCR(imageFile);
+		} catch (Exception e) {
+			logger.error(e, "验证码识别出错!");
+			throw e;
+		}
+		
+		if (StrUtil.isNotEmpty(result)) {
+			result = result.replaceAll("[^a-z^A-Z^0-9]", "");
+		}
+		
+		return result;
+		
+	}
+	
 	@Override
 	public String getText() {
 		// TODO Auto-generated method stub
@@ -222,4 +269,10 @@ public class PageElement extends BaseObject implements IBaseElement {
 		getStepReport().setResult(map.toString());
 		return map;
 	}
+
+	@Override
+	public String toString() {
+		return "PageElement [name=" + name + "]";
+	}
+
 }

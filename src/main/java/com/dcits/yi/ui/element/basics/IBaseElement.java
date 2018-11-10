@@ -120,4 +120,15 @@ public interface IBaseElement {
 	 * @return Map&lt;K, V&gt; K为value V为text
 	 */
 	Map<String, String> getAllOptions();
+	
+	/**
+	 * 验证码识别
+	 * @param pageEle 图片元素
+	 * @param x   验证图片所在页面的x轴起始位置,px
+	 * @param y   验证图片所在页面的y轴起始位置,px
+	 * @param language 字库文件,不需要后缀,不传则默认为英文
+	 * @return
+	 * @throws Exception
+	 */
+	String OCRCode(int x, int y, String language) throws Exception ;
 }

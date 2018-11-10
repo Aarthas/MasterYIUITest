@@ -1,55 +1,44 @@
 package com.dcits.yi.ui.element;
 
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.lang.reflect.Field;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import javax.imageio.ImageIO;
-
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.Alert;
-import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
-import org.openqa.selenium.WebElement;
 
-import com.dcits.yi.constant.TestConst;
 import com.dcits.yi.tool.TestKit;
 import com.dcits.yi.ui.GlobalTestConfig;
 import com.dcits.yi.ui.aop.CreateStepReportAspect;
 import com.dcits.yi.ui.element.basics.IBasePage;
 
 import cn.hutool.aop.ProxyUtil;
-import cn.hutool.core.date.DateUtil;
-import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.log.Log;
 import cn.hutool.log.LogFactory;
-import net.sourceforge.tess4j.ITesseract;
-import net.sourceforge.tess4j.Tesseract;
-import net.sourceforge.tess4j.util.ImageHelper;
 
 /**
  * 页面对象模型
- * @author Administrator
+ * @author xuwangcheng
  *
  */
 public class BasePage extends BaseObject implements IBasePage {
 	private static final Log logger = LogFactory.get();
 	
 	/**
-	 * 当前页面url,不一定存在
+	 * 当前页面得url,非必须
 	 */
 	protected String url;
 	
+	@Deprecated
 	protected boolean initFlag = false;
 	
 	/**
@@ -78,11 +67,11 @@ public class BasePage extends BaseObject implements IBasePage {
 	}
 	
 	/**
-	 * 截图
-	 * 
+	 * 当前页面的截图,截图失败不会中断测试<br>
+	 * 测试过程中如果发生异常,也会自动截图
 	 */
 	public static String screenshot() {
-		String pngName = DateUtil.format(new Date(), "yyyyMMddHHmmss") +".png";
+		String pngName = IdUtil.fastUUID() +".png";
 		String capturePath = GlobalTestConfig.ENV_INFO.getScreenshotFolder() + "/" + pngName;		
 		try {
 			File screenShotFile = ((TakesScreenshot)GlobalTestConfig.getTestRunningObject().getDriver()).getScreenshotAs(OutputType.FILE); 
@@ -95,48 +84,6 @@ public class BasePage extends BaseObject implements IBasePage {
 			logger.error("截图过程中出错了 => {}", e.getMessage());
 		}	
 		return null;
-	}
-	
-	/**
-	 * 验证码识别
-	 * @param pageEle 图片元素
-	 * @param x   x轴位置
-	 * @param y   y轴位置
-	 * @param width 宽度
-	 * @param heigth 高度
-	 * @return
-	 * @throws Exception
-	 */
-	public static String OCRCode(PageElement pageEle, int x, int y, int width, int heigth) throws Exception {
-		String result = null;
-		WebElement ele = pageEle.getEle();
-		Dimension eleSize = ele.getSize();
-		String capturePath = TestKit.getProjectRootPath() + screenshot();
-		if (!FileUtil.exist(capturePath)) {
-			throw new Exception("在验证码识别过程中无法获取到页面截图!");
-		}
-		try {
-			BufferedImage originalImage = ImageIO.read(new File(capturePath));
-			BufferedImage croppedImage = originalImage.getSubimage(x, y, eleSize.getWidth() + width, eleSize.getHeight() + heigth);
-			
-			String tempImageName = IdUtil.fastUUID() + ".png";
-			ImageIO.write(ImageHelper.convertImageToBinary(croppedImage), "png", new File(TestConst.TEST_TEMP_FLODER + File.separator + tempImageName));
-			
-			File imageFile = new File(TestConst.TEST_TEMP_FLODER + File.separator + tempImageName);
-			
-			ITesseract instance = new Tesseract();
-			result = instance.doOCR(imageFile);
-		} catch (Exception e) {
-			logger.error(e, "验证码识别出错!");
-			throw e;
-		}
-		
-		if (StrUtil.isNotEmpty(result)) {
-			result = result.replaceAll("[^a-z^A-Z^0-9]", "");
-		}
-		
-		return result;
-		
 	}
 	
 	/**

@@ -29,8 +29,9 @@ logs/
 .project
 .classpath
 
-����˵��
 report.db
 
 .idea/
 *.iml
+
+temp/
