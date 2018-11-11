@@ -42,20 +42,6 @@ public class BasePage extends BaseObject implements IBasePage {
 	protected boolean initFlag = false;
 	
 	/**
-	 * 断言，在页面方法中必须要使用此方法来进行断言操作，否则在日志和报告中不会记录内容
-	 * @param assertContent 断言结果
-	 * @param failMsgFormat 断言失败时的说明
-	 * @param arguments
-	 * @throws Exception
-	 */
-	public void Assert(boolean assertContent, String failMsgFormat, Object ... arguments) throws Exception {
-		if (!assertContent) {
-			Mark(("Assert Fail:" + StrUtil.format(failMsgFormat, arguments)));
-			throw new Exception("Assert Fail:" + StrUtil.format(failMsgFormat, arguments));
-		}
-	}
-	
-	/**
 	 * 追加内容到当前操作步骤的备注信息
 	 * @param format
 	 * @param arguments

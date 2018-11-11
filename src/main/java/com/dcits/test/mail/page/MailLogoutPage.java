@@ -1,5 +1,6 @@
 package com.dcits.test.mail.page;
 
+import com.dcits.yi.tool.AssertUtil;
 import com.dcits.yi.ui.element.BasePage;
 import com.dcits.yi.ui.element.PageElement;
 
@@ -17,7 +18,7 @@ public class MailLogoutPage extends BasePage {
 	 * @throws Exception
 	 */
 	public void verifyLogout() throws Exception {
-		Assert(getTitle().equals("网易邮箱 - 您已成功退出邮箱"), "当前标题不是[网易邮箱 - 您已成功退出邮箱]，可能没有退出成功!");
+		AssertUtil.equals(getTitle(), "网易邮箱 - 您已成功退出邮箱", "当前标题不是[网易邮箱 - 您已成功退出邮箱]，可能没有退出成功!");
 	}
 	/**
 	 * 重新登录

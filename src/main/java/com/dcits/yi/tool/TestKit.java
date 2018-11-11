@@ -60,8 +60,6 @@ public class TestKit {
 		if (System.getProperty("os.name").toLowerCase().startsWith("win")) {
 			return "win";
 		}
-
-
 		return "mac";
 	}
 	

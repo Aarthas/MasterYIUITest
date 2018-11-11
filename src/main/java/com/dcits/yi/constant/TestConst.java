@@ -12,6 +12,8 @@ import com.dcits.yi.tool.TestKit;
  *
  */
 public class TestConst {
+	
+	public static final String FRAMEWORK_VERSION = "0.4.0beta";
 
 	/**
 	 * 测试缓存文件夹

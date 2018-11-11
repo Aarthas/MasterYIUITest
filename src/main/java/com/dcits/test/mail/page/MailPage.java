@@ -2,6 +2,7 @@ package com.dcits.test.mail.page;
 
 import org.openqa.selenium.Keys;
 
+import com.dcits.yi.tool.AssertUtil;
 import com.dcits.yi.ui.element.BasePage;
 import com.dcits.yi.ui.element.PageElement;
 
@@ -32,7 +33,7 @@ public class MailPage extends BasePage {
 	 * @throws Exception 
 	 */
 	public void verifyLogin(String loginEmail) throws Exception {
-		Assert(用户标签.getText().equals(loginEmail), "实际结果为{}， 与预期结果{}不一致，验证失败!", 用户标签.getText(), loginEmail);
+		AssertUtil.equals(用户标签.getText(), loginEmail, "实际结果为{}， 与预期结果{}不一致，验证失败!", 用户标签.getText(), loginEmail);
 	}
 	
 	/**

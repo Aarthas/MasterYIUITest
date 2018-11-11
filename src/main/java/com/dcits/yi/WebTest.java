@@ -88,6 +88,7 @@ public class WebTest {
 	 */
 	public WebTest(String suiteYamlFileName) throws Exception {
 		super();
+		logger.info("欢迎你使用易大师UI自动化测试框架，当前版本为[{}]", TestConst.FRAMEWORK_VERSION);
 		this.suiteYamlFileName = suiteYamlFileName;
 		parseSuiteYaml();
 		init();
@@ -100,6 +101,7 @@ public class WebTest {
 	 */
 	public WebTest(Class ... caseClasses) throws Exception {
 		super();
+		logger.info("欢迎你使用易大师UI自动化测试框架，当前版本为[{}]", TestConst.FRAMEWORK_VERSION);
 		this.caseClasses = caseClasses;
 		parseCaseClasses();
 		init();

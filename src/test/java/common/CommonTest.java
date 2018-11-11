@@ -4,9 +4,10 @@ import java.io.File;
 
 import org.junit.Test;
 
-import com.dcits.test.pig.usecase.PigTest;
+import com.dcits.test.baidu.usecase.Baidu;
 import com.dcits.yi.WebTest;
 import com.dcits.yi.constant.TestConst;
+import com.dcits.yi.ui.report.manage.ZTestReportManager;
 
 import net.sourceforge.tess4j.ITesseract;
 import net.sourceforge.tess4j.Tesseract;
@@ -17,11 +18,11 @@ public class CommonTest {
 	
 	public static void main(String[] args) throws Exception {
 		//实例化WebTest对象，可传入suite文件或者多个测试用例类
-		WebTest test = new WebTest(PigTest.class);
+		WebTest test = new WebTest(Baidu.class);
 		
 		//传入一个或多个测试报告处理器对象
 		
-		//test.setReportManagers(new ZTestReportManager());		
+		test.setReportManagers(new ZTestReportManager());		
 		
 		//常规启动测试
 		test.start();

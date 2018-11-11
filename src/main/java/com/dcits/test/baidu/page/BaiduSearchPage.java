@@ -11,5 +11,6 @@ public class BaiduSearchPage extends BasePage {
 	public void search(String keyword) {		
 		搜索框.sendKeys(keyword);
 		搜索按钮.click();
+		//AssertUtil.checkBetween(5, 5, 2);
 	}
 }
