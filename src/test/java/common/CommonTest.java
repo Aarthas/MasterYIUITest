@@ -1,28 +1,19 @@
 package common;
 
-import java.io.File;
-
-import org.junit.Test;
-
-import com.dcits.test.baidu.usecase.Baidu;
+import com.dcits.test.lejia.usecase.Lejia;
 import com.dcits.yi.WebTest;
-import com.dcits.yi.constant.TestConst;
-import com.dcits.yi.ui.report.manage.ZTestReportManager;
-
-import net.sourceforge.tess4j.ITesseract;
-import net.sourceforge.tess4j.Tesseract;
-import net.sourceforge.tess4j.TesseractException;
+import com.dcits.yi.ui.report.manage.CucumberReportManager;
 
 
 public class CommonTest {
 	
 	public static void main(String[] args) throws Exception {
 		//实例化WebTest对象，可传入suite文件或者多个测试用例类
-		WebTest test = new WebTest(Baidu.class);
+		WebTest test = new WebTest(Lejia.class);
 		
 		//传入一个或多个测试报告处理器对象
 		
-		test.setReportManagers(new ZTestReportManager());		
+		test.setReportManagers(new CucumberReportManager());		
 		
 		//常规启动测试
 		test.start();
@@ -38,13 +29,5 @@ public class CommonTest {
 		
 		//启动spring-boot-web，可以调用api获取一些信息或者启动测试
 		//SpringApplication.run(Application.class);
-	}
-
-	@Test
-	public void common() throws TesseractException {
-		ITesseract instance = new Tesseract();
-		instance.setDatapath("D:\\it\\Tesseract-OCR\\tessdata");
-		String result = instance.doOCR(new File(TestConst.TEST_TEMP_FLODER + File.separator + "222.png"));
-		System.out.println(result);
 	}
 }

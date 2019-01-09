@@ -48,7 +48,7 @@ public class StepReport {
 	/**
 	 * 备注信息
 	 */
-	private String mark;
+	private String mark = "";
 	/**
 	 * 截图路径：相对路径
 	 */

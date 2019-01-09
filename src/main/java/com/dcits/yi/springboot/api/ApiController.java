@@ -1,10 +1,6 @@
 package com.dcits.yi.springboot.api;
 
-import java.io.BufferedInputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.OutputStream;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -212,7 +208,7 @@ public class ApiController {
 	}
 	
 	/**
-	 * 获取测试报告html文件，默认为ztest报告处理器生成的html
+	 * 获取测试报告文件，默认为ztest报告处理器生成的html
 	 * @param filename 要下载的测试报告文件名称，如果没有提供，则指定为当前的测试报告
 	 * @return
 	 */

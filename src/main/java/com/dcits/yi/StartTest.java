@@ -6,6 +6,8 @@ import com.dcits.yi.springboot.Application;
 import com.dcits.yi.ui.EnvSettingInfo;
 import com.dcits.yi.ui.GlobalTestConfig;
 
+import cn.hutool.core.io.FileUtil;
+
 /**
  * 执行入口：以jar包方式运行测试
  * @author xuwangcheng
