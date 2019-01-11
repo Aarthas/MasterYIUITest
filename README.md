@@ -1,7 +1,9 @@
 # MasterYI UI Test Framework
 易大师UI自动化测试框架
 
- **_当前版本：0.4.1beta_** 
+ **_当前版本：0.4.1beta_**  
+ **_更新日期：2019-01-11_** 
+
 
 码云地址：https://gitee.com/xuwangcheng/MasterYI-UI-Test-Framework  
 更新日志: [易大师UI自动化测试框架-更新日志](https://gitee.com/xuwangcheng/MasterYI-UI-Test-Framework/wikis/pages?title=%E6%9B%B4%E6%96%B0%E6%97%A5%E5%BF%97&parent=)  
