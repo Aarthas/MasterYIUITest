@@ -1,20 +1,28 @@
-package com.dcits.test.lejia.usecase;
+package com.dcits.busi.lejia.usecase;
 
-import com.dcits.test.lejia.data.LoginData;
-import com.dcits.test.lejia.data.StudentInfo;
-import com.dcits.test.lejia.page.LoginPage;
-import com.dcits.test.lejia.page.MainPage;
+import com.dcits.busi.lejia.data.LoginData;
+import com.dcits.busi.lejia.data.StudentInfo;
+import com.dcits.busi.lejia.page.LoginPage;
+import com.dcits.busi.lejia.page.MainPage;
 import com.dcits.yi.tool.AssertUtil;
 import com.dcits.yi.ui.usecase.UseCase;
 
+/**
+ * 
+* @version 1.0.0
+* @Description 
+* @author xuwangcheng
+* @date 2019年1月11日下午3:30:51
+ */
 public class Lejia {	
 	
 	public LoginPage loginPage;
 	public MainPage mainPage;
 		
 	public LoginData loginData;
+	public LoginData loginData2;
 	
-	public StudentInfo stuData;
+	public StudentInfo stuData;             
 	
 	@UseCase(name="乐驾ERP登录测试")
 	public void login() {
@@ -25,7 +33,7 @@ public class Lejia {
 	}
 	
 	
-	@UseCase(name="报名受理")
+	@UseCase(name="报名受理", enabled=false)
 	public void OP1001() {
 		mainPage.switchMenu("学员管理", "报名受理");
 		

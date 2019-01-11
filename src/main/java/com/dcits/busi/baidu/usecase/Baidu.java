@@ -1,9 +1,16 @@
-package com.dcits.test.baidu.usecase;
+package com.dcits.busi.baidu.usecase;
 
-import com.dcits.test.baidu.page.BaiduSearchPage;
-import com.dcits.test.baidu.page.SearchResultPage;
+import com.dcits.busi.baidu.page.BaiduSearchPage;
+import com.dcits.busi.baidu.page.SearchResultPage;
 import com.dcits.yi.ui.usecase.UseCase;
 
+/**
+ * 
+* @version 1.0.0
+* @Description 
+* @author xuwangcheng
+* @date 2019年1月11日下午3:30:10
+ */
 public class Baidu {
 	
 	public BaiduSearchPage 搜索页面;

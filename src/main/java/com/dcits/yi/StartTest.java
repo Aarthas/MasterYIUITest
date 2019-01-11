@@ -23,7 +23,6 @@ public class StartTest {
 			System.out.println("缺少参数, [-start-web]启动spring boot，[-start-cron]启动定时任务");
 			System.exit(0);
 		}
-		
 		if ("-start-web".equalsIgnoreCase(args[0])) {
 			SpringApplication.run(Application.class);
 		} else if ("-start-cron".equalsIgnoreCase(args[0])) {

@@ -24,12 +24,12 @@ public class CreateStepReportAspect extends SimpleAspect {
 
 	@Override
 	public boolean before(Object target, Method method, Object[] args) {
-		if (TestConst.action_keyword.get(method.getName()) == null) {
+		if (TestConst.ACTION_KEYWORD.get(method.getName()) == null) {
 			return true;
 		}
 		
 		getTestRunningObject().setStepReport(new StepReport());	
-		getTestRunningObject().getStepReport().setActionName(TestConst.action_keyword.get(method.getName()));		
+		getTestRunningObject().getStepReport().setActionName(TestConst.ACTION_KEYWORD.get(method.getName()));		
 		getTestRunningObject().getStepReport().setParams(StrUtil.join(",", args));	
 		getTestRunningObject().getStepReport().setTestTime(DateUtil.now());		
 		return true;
@@ -37,7 +37,7 @@ public class CreateStepReportAspect extends SimpleAspect {
 
 	@Override
 	public boolean after(Object target, Method method, Object[] args) {
-		if (TestConst.action_keyword.get(method.getName()) == null) {
+		if (TestConst.ACTION_KEYWORD.get(method.getName()) == null) {
 			return true;
 		}
 		getTestRunningObject().checkWindow(method.getName());

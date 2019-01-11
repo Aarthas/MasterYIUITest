@@ -29,10 +29,25 @@ public abstract class BaseDataModel {
 	private static final Log logger = LogFactory.get();
 	
 	/**
+	 * 是否为初次初始化该数据，通过此参数判断是否在initData方法中执行destroyData方法
+	 */
+	protected boolean firstInitFlag = true;
+	
+	/**
 	 * 自定义初始化数据，如果数据需要更新，需要重新调用一次该方法
 	 */
 	public abstract void initData();
 	
+	public abstract void destroyData();
+	
+	
+	public void setFirstInitFlag(boolean firstInitFlag) {
+		this.firstInitFlag = firstInitFlag;
+	}
+	
+	public boolean isFirstInitFlag() {
+		return firstInitFlag;
+	}
 	
 	/**
 	 * 从excel读取数据,默认第一个sheet页

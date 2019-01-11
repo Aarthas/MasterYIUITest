@@ -3,6 +3,7 @@ package com.dcits.yi.ui.element;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
@@ -226,7 +227,9 @@ public class PageElement extends BaseObject implements IBaseElement {
 	@Override
 	public void sendKeys(String str, boolean clearFlag) {
 		getEle();
-		if (clearFlag) ele.clear();
+		if (clearFlag) {
+			ele.clear();
+		}
 		ele.sendKeys(str);		
 	}
 	
@@ -256,8 +259,9 @@ public class PageElement extends BaseObject implements IBaseElement {
 
 	@Override
 	public Map<String, String> getAllOptions() {
-		Map<String, String> map = new HashMap<String, String>();
-		for (WebElement e:getSelect().getAllSelectedOptions()) {
+		List<WebElement> selectEles = getSelect().getAllSelectedOptions();
+		Map<String, String> map = new HashMap<String, String>(selectEles.size());
+		for (WebElement e:selectEles) {
 			map.put(e.getAttribute("value"), e.getText());
 		}
 		getStepReport().setResult(map.toString());

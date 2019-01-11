@@ -18,11 +18,17 @@ import com.dcits.yi.ui.report.manage.ReportPersistenceReportManager;
 import com.dcits.yi.ui.report.manage.ZTestReportManager;
 
 import cn.hutool.core.io.FileUtil;
-import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.json.JSONUtil;
 import cn.hutool.log.Log;
 import cn.hutool.log.LogFactory;
 
+/**
+ * 
+* @version 1.0.0
+* @Description 
+* @author xuwangcheng
+* @date 2019年1月11日下午3:32:09
+ */
 @Controller
 public class WebController {
 	private static ReportPersistenceReportManager manager = new ReportPersistenceReportManager();

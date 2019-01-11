@@ -4,7 +4,7 @@
 
 	<groupId>com.dcits</groupId>
 	<artifactId>MasterYIUITest</artifactId>
-	<version>0.3.2beta</version>
+	<version>0.4.1beta</version>
 	<packaging>jar</packaging>
 
 	<name>MasterYI-UI-Test-Framework</name>

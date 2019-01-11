@@ -9,6 +9,13 @@ import org.springframework.web.servlet.view.freemarker.FreeMarkerViewResolver;
 
 import com.dcits.yi.tool.TestKit;
 
+/**
+ * 
+* @version 1.0.0
+* @Description 
+* @author xuwangcheng
+* @date 2019年1月11日下午3:31:58
+ */
 @Configurable
 @ComponentScan({ "com.dcits.yi.springboot"})
 public class SpringConfiguration {

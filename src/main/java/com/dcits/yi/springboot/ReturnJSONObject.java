@@ -3,6 +3,13 @@ package com.dcits.yi.springboot;
 import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONObject;
 
+/**
+ * 
+* @version 1.0.0
+* @Description 默认返回json对象格式
+* @author xuwangcheng
+* @date 2019年1月11日下午3:31:22
+ */
 public class ReturnJSONObject {
 	
 	public static final int SUCCESS_CODE = 200;

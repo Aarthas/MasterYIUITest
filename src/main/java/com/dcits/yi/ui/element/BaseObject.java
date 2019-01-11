@@ -21,17 +21,17 @@ import cn.hutool.log.LogFactory;
 public abstract class BaseObject {
 	
 	private static final Log logger = LogFactory.get();
-	public static final Map<String, String> location_Types = new HashMap<String, String>();
+	public static final Map<String, String> LOCATION_TYPES = new HashMap<String, String>();
 	
 	static {
-		location_Types.put("id", "Id");
-		location_Types.put("linktext", "LinkText");
-		location_Types.put("name", "Name");
-		location_Types.put("tagname", "TagName");
-		location_Types.put("xpath", "XPath");
-		location_Types.put("classname", "ClassName");
-		location_Types.put("partiallinktext", "PartialLinkText");
-		location_Types.put("cssselector", "CssSelector");
+		LOCATION_TYPES.put("id", "Id");
+		LOCATION_TYPES.put("linktext", "LinkText");
+		LOCATION_TYPES.put("name", "Name");
+		LOCATION_TYPES.put("tagname", "TagName");
+		LOCATION_TYPES.put("xpath", "XPath");
+		LOCATION_TYPES.put("classname", "ClassName");
+		LOCATION_TYPES.put("partiallinktext", "PartialLinkText");
+		LOCATION_TYPES.put("cssselector", "CssSelector");
 	}
 	
 	/**

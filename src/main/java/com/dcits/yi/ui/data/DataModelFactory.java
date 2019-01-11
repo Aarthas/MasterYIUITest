@@ -1,5 +1,8 @@
 package com.dcits.yi.ui.data;
 
+import com.dcits.yi.ui.GlobalTestConfig;
+
+import cn.hutool.core.lang.Singleton;
 import cn.hutool.log.Log;
 import cn.hutool.log.LogFactory;
 
@@ -14,8 +17,12 @@ public class DataModelFactory {
 	
 	public static <T extends BaseDataModel> T getDataModelInstance(Class clazz) {
 		try {
-			BaseDataModel model = (BaseDataModel) clazz.newInstance();
-			model.initData();
+			BaseDataModel model = (BaseDataModel) Singleton.get(clazz);
+			if (model.isFirstInitFlag()) {
+				model.initData();
+				model.setFirstInitFlag(false);
+				GlobalTestConfig.getTestRunningObject().getDatas().add(model);
+			}						
 			return (T) model;
 		} catch (Exception e) {
 			// TODO: handle exception

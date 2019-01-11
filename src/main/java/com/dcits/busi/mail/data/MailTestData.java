@@ -1,10 +1,17 @@
-package com.dcits.test.mail.data;
+package com.dcits.busi.mail.data;
 
 import com.dcits.yi.tool.TestKit;
 import com.dcits.yi.ui.data.BaseDataModel;
 
 import cn.hutool.setting.dialect.Props;
 
+/**
+ * 
+* @version 1.0.0
+* @Description 
+* @author xuwangcheng
+* @date 2019年1月11日下午3:30:58
+ */
 public class MailTestData extends BaseDataModel {
 	
 	public String send_email;
@@ -30,5 +37,10 @@ public class MailTestData extends BaseDataModel {
 		receive_password = p.getStr("receive_password");
 		
 		send_content = "易大师UI自动化测试框架";
+	}
+
+	@Override
+	public void destroyData() {
+		System.out.println("");
 	}	
 }

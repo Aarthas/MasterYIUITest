@@ -32,7 +32,8 @@ public class XegerUtil {
      */
     public final static int getRandomInt(int min, int max, Random random) {
         int dif = max - min;
-        float number = random.nextFloat();              // 0 <= number < 1
+        // 0 <= number < 1
+        float number = random.nextFloat();              
         return min + Math.round(number * dif);
     }
 

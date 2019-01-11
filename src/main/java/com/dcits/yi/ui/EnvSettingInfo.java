@@ -20,7 +20,7 @@ public class EnvSettingInfo {
 	
 	public static boolean DEV_MODE = true;
 
-	private String driverBinSuffix = TestKit.getOsName().equals("win") ? ".exe" : "";
+	private String driverBinSuffix = "win".equals(TestKit.getOsName()) ? ".exe" : "";
 	
 	private boolean remoteMode;
 	
@@ -130,11 +130,21 @@ public class EnvSettingInfo {
 			firefoxDriverPath = TestKit.getProjectRootPath() + "/drivers/geckodriver" + driverBinSuffix;
 		}
 		
-		if (StrUtil.isNotEmpty(chromeDriverPath)) System.setProperty("webdriver.chrome.driver", chromeDriverPath);
-		if (StrUtil.isNotEmpty(ieDriverPath)) System.setProperty("webdriver.ie.driver", ieDriverPath);
-		if (StrUtil.isNotEmpty(firefoxDriverPath)) System.setProperty("webdriver.gecko.driver", firefoxDriverPath);
-		if (StrUtil.isNotEmpty(operaDriverPath)) System.setProperty("webdriver.opera.driver", operaDriverPath);	
-		if (StrUtil.isNotEmpty(firefoxBinPath)) System.setProperty("webdriver.firefox.bin", firefoxBinPath);
+		if (StrUtil.isNotEmpty(chromeDriverPath)) {
+			System.setProperty("webdriver.chrome.driver", chromeDriverPath);
+		}
+		if (StrUtil.isNotEmpty(ieDriverPath)) {
+			System.setProperty("webdriver.ie.driver", ieDriverPath);
+		}
+		if (StrUtil.isNotEmpty(firefoxDriverPath)) {
+			System.setProperty("webdriver.gecko.driver", firefoxDriverPath);
+		}
+		if (StrUtil.isNotEmpty(operaDriverPath)) {
+			System.setProperty("webdriver.opera.driver", operaDriverPath);	
+		}
+		if (StrUtil.isNotEmpty(firefoxBinPath)) {
+			System.setProperty("webdriver.firefox.bin", firefoxBinPath);
+		}
 	}
 	
 	public void setTesseractOCRPath(String tesseractOCRPath) {

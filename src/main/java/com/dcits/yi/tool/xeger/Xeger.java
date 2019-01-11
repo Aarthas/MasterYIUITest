@@ -71,7 +71,8 @@ public class Xeger {
         }
         int nroptions = state.isAccept() ? transitions.size() : transitions.size() - 1;
         int option = XegerUtil.getRandomInt(0, nroptions, random);
-        if (state.isAccept() && option == 0) {          // 0 is considered stop
+        // 0 is considered stop
+        if (state.isAccept() && option == 0) {          
             return;
         }
         // Moving on to next transition

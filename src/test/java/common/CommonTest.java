@@ -1,15 +1,21 @@
 package common;
 
-import com.dcits.test.lejia.usecase.Lejia;
+import com.dcits.busi.baidu.usecase.Baidu;
 import com.dcits.yi.WebTest;
 import com.dcits.yi.ui.report.manage.CucumberReportManager;
 
-
+/**
+ * 
+* @version 1.0.0
+* @Description 测试启动类
+* @author xuwangcheng
+* @date 2019年1月11日下午3:32:42
+ */
 public class CommonTest {
 	
 	public static void main(String[] args) throws Exception {
 		//实例化WebTest对象，可传入suite文件或者多个测试用例类
-		WebTest test = new WebTest(Lejia.class);
+		WebTest test = new WebTest(Baidu.class);
 		
 		//传入一个或多个测试报告处理器对象
 		

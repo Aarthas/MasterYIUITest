@@ -1,4 +1,4 @@
-package com.dcits.test.mail.page;
+package com.dcits.busi.mail.page;
 
 import org.openqa.selenium.Keys;
 

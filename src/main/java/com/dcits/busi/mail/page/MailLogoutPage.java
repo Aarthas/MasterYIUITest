@@ -1,4 +1,4 @@
-package com.dcits.test.mail.page;
+package com.dcits.busi.mail.page;
 
 import com.dcits.yi.tool.AssertUtil;
 import com.dcits.yi.ui.element.BasePage;

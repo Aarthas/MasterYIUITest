@@ -85,10 +85,18 @@ public class ZTestReportManager implements IReportManager {
 			JSONArray log = new JSONArray();
 			for (StepReport step:caseReport.getStepReports()) {
 				log.add("<strong>" + step.getStepName() + "</strong>");
-				if (StrUtil.isNotEmpty(step.getLocation())) log.add("元素:&nbsp;" + step.getLocation());
-				if (StrUtil.isNotEmpty(step.getParams())) log.add("参数:&nbsp;" + step.getParams());
-				if (StrUtil.isNotEmpty(step.getResult())) log.add("结果:&nbsp;" + step.getResult());
-				if (StrUtil.isNotEmpty(step.getMark())) log.add("<span style=\"color:red;\">" + step.getMark() + "</span><br>"); 
+				if (StrUtil.isNotEmpty(step.getLocation())) {
+					log.add("元素:&nbsp;" + step.getLocation());
+				}
+				if (StrUtil.isNotEmpty(step.getParams())) {
+					log.add("参数:&nbsp;" + step.getParams());
+				}
+				if (StrUtil.isNotEmpty(step.getResult())) {
+					log.add("结果:&nbsp;" + step.getResult());
+				}
+				if (StrUtil.isNotEmpty(step.getMark())) {
+					log.add("<span style=\"color:red;\">" + step.getMark() + "</span><br>"); 
+				}
 			}
 			result.put("log", log);
 			results.add(result);

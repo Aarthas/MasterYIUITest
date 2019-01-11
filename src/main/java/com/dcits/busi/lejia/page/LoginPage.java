@@ -1,8 +1,15 @@
-package com.dcits.test.lejia.page;
+package com.dcits.busi.lejia.page;
 
 import com.dcits.yi.ui.element.BasePage;
 import com.dcits.yi.ui.element.PageElement;
 
+/**
+ * 
+* @version 1.0.0
+* @Description 
+* @author xuwangcheng
+* @date 2019年1月11日下午3:30:35
+ */
 public class LoginPage extends BasePage {
 	
 	public PageElement 用户名输入框;

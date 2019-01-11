@@ -110,9 +110,10 @@ public class ReportPersistenceReportManager implements IReportManager {
 			getConnection();
 			ps = conn.prepareStatement("select id,title,browserName,testTime,endTime,totalCount,successCount,failCount,skipCount,useTime from " + tableName + ";");
 			rs = ps.executeQuery();
-			
-			ResultSetMetaData md = rs.getMetaData(); //得到结果集(rs)的结构信息，比如字段数、字段名等   
-	        int columnCount = md.getColumnCount(); //返回此 ResultSet 对象中的列数 
+			//得到结果集(rs)的结构信息，比如字段数、字段名等
+			ResultSetMetaData md = rs.getMetaData();    
+			//返回此 ResultSet 对象中的列数 
+	        int columnCount = md.getColumnCount(); 
 	           
 			reports = new ArrayList<Map<String, Object>>();
 			Map<String, Object> rowData = null;

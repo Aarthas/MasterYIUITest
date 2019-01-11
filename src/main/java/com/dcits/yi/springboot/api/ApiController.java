@@ -25,6 +25,13 @@ import cn.hutool.json.JSONArray;
 import cn.hutool.log.Log;
 import cn.hutool.log.LogFactory;
 
+/**
+ * 
+* @version 1.0.0
+* @Description 
+* @author xuwangcheng
+* @date 2019年1月11日下午3:31:45
+ */
 @RestController
 public class ApiController {
 	private static final Log logger = LogFactory.get();

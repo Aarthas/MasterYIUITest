@@ -54,7 +54,9 @@ public class TestDB {
 	public static TestDB getInstance(Props p, String name) throws Exception {
 		String type = p.getStr("db." + name + ".type").trim();
 		String driverClass = p.getStr("db." + name + ".driverClass");
-		if (StrUtil.isEmpty(driverClass)) driverClass = driverClasses.get(type);
+		if (StrUtil.isEmpty(driverClass)) {
+			driverClass = driverClasses.get(type);
+		}
 		
 		if (StrUtil.isEmpty(driverClass)) {
 			throw new NoClassDefFoundError("不支持的数据库类型" + type);

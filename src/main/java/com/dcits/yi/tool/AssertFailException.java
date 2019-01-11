@@ -8,6 +8,13 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.log.Log;
 import cn.hutool.log.LogFactory;
 
+/**
+ * 
+* @version 1.0.0
+* @Description 
+* @author xuwangcheng
+* @date 2019年1月11日下午3:32:17
+ */
 public class AssertFailException extends RuntimeException {
 	private static final Log logger = LogFactory.get();
 

@@ -169,7 +169,7 @@ public class Locator {
 	 * @throws Exception
 	 */
 	private By getBy() throws Exception {
-		Class clz = Class.forName("org.openqa.selenium.By$By" + BaseObject.location_Types.get(locationType.toLowerCase().trim()));
+		Class clz = Class.forName("org.openqa.selenium.By$By" + BaseObject.LOCATION_TYPES.get(locationType.toLowerCase().trim()));
 		Constructor ctr = clz.getConstructor(String.class);
 		return (By) ctr.newInstance(locationValue);
 	}

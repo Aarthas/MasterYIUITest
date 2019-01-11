@@ -76,7 +76,9 @@ public class WebTest {
 	
 	private static Object lock = new Object();
 	
-	//分别表示 finishCount,successCount,failCount, SkipCount
+	/**
+	 * 分别表示 finishCount,successCount,failCount, SkipCount
+	 */
 	private AtomicInteger[] testCounts;
 	
 	private int totalCount = 0;
@@ -255,6 +257,13 @@ public class WebTest {
 		//清理temp文件夹		
 		FileUtil.clean(TestConst.TEST_TEMP_FLODER);
 		logger.info("清理temp文件夹[{}]成功!", TestConst.TEST_TEMP_FLODER);
+		
+		//执行每个DataModel的destory方法
+		for (BaseDataModel d:GlobalTestConfig.getTestRunningObject().getDatas()) {
+			d.destroyData();
+		}
+		//remove线程对象
+		GlobalTestConfig.removeTestRunningObject();
 	}
 	
 	/**
@@ -390,7 +399,9 @@ public class WebTest {
 				caseModel.setRetryCount(Convert.toInt(m.get("retryCount"), retryCount));
 				caseModel.setTag(Convert.toStr(m.get("tag"), tag));	
 				
-				if (!tagCases.containsKey(caseModel.getTag())) tagCases.put(caseModel.getTag(), new ArrayList<ExecuteCaseModel>());
+				if (!tagCases.containsKey(caseModel.getTag())) {
+					tagCases.put(caseModel.getTag(), new ArrayList<ExecuteCaseModel>());
+				}
 				tagCases.get(caseModel.getTag()).add(caseModel);
 				
 				totalCount += caseModel.getBrowserType().size();
@@ -410,7 +421,9 @@ public class WebTest {
 	 * @throws Exception
 	 */
 	private void parseCaseClasses() throws Exception {
-		if (caseClasses.length == 0) return;
+		if (caseClasses.length == 0) {
+			return;
+		}
 		for (Class clz:caseClasses) {
 			logger.info("解析测试用例执行类：{}", clz.getName());
 			Object o = ReflectUtil.newInstance(clz);
@@ -435,7 +448,9 @@ public class WebTest {
 				caseModel.getTargets().add(o);
 				caseModel.getMethods().add(m);
 				
-				if (!tagCases.containsKey(caseModel.getTag())) tagCases.put(caseModel.getTag(), new ArrayList<ExecuteCaseModel>());
+				if (!tagCases.containsKey(caseModel.getTag())) {
+					tagCases.put(caseModel.getTag(), new ArrayList<ExecuteCaseModel>());
+				}
 				tagCases.get(caseModel.getTag()).add(caseModel);
 				
 				totalCount += caseModel.getBrowserType().size();

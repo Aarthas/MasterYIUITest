@@ -1,20 +1,33 @@
-package com.dcits.test.lejia.page;
+package com.dcits.busi.lejia.page;
 
 import com.dcits.yi.tool.AssertUtil;
 import com.dcits.yi.ui.element.BasePage;
 import com.dcits.yi.ui.element.PageElement;
 
+/**
+ * 
+* @version 1.0.0
+* @Description 
+* @author xuwangcheng
+* @date 2019年1月11日下午3:30:43
+ */
 public class MainPage extends BasePage {
 	
-	//验证是否登录成功
+	/**
+	 * 验证是否登录成功
+	 */
 	public PageElement loginNameText;
 	
-	//菜单相关
+	/**
+	 * 菜单相关
+	 */
 	public PageElement currentMenuNodelLvOne;
 	public PageElement menuNodeLvOne;
 	public PageElement menuNodeLvTwo;
 	
-	//模块的公共元素
+	/**
+	 * 模块的公共元素
+	 */
 	public PageElement search_keywords;
 	public PageElement search_button;
 	public PageElement search_reset_button;
@@ -22,11 +35,15 @@ public class MainPage extends BasePage {
 	public PageElement table_op_bar;
 	
 	
-	//layer弹出层相关
+	/**
+	 * layer弹出层相关
+	 */
 	public PageElement layui_confirm_dialog_inner;
 	public PageElement layui_confirm_dialog_outer;
 	
-	//报名受理
+	/**
+	 * 报名受理
+	 */
 	public PageElement addNewButton;
 	public PageElement exportButton;
 	

@@ -80,7 +80,9 @@ public class BasePage extends BaseObject implements IBasePage {
 		//获取页面对应的element元素Map		
 		String pageName = this.getClass().getSimpleName().split("\\$\\$")[0];
 		Map map = MapUtil.get(GlobalTestConfig.elements, pageName, Map.class);
-		if (map == null) throw new Exception(pageName + "页面没有对应的Elelement配置信息，请检查element配置的yaml文件!"); 
+		if (map == null) {
+			throw new Exception(pageName + "页面没有对应的Elelement配置信息，请检查element配置的yaml文件!"); 
+		}
 		
 		//设置url
 		if (map.get("url") != null) {

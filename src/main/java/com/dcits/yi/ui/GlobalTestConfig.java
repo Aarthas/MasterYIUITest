@@ -56,6 +56,10 @@ public class GlobalTestConfig {
 		return tro.get();
 	}
 	
+	public static void removeTestRunningObject() {
+		tro.remove();
+	}
+	
 	private static void parseConfig() {	
 		Props props = new Props(new File(TestKit.getProjectRootPath() + "/seleniumConfig.properties"));	
 		
