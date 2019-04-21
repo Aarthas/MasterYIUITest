@@ -2,8 +2,8 @@ package com.dcits.busi.lejia.usecase;
 
 import com.dcits.busi.lejia.data.LoginData;
 import com.dcits.busi.lejia.data.StudentInfo;
-import com.dcits.busi.lejia.page.LoginPage;
-import com.dcits.busi.lejia.page.MainPage;
+import com.dcits.busi.lejia.page.LeJiaLoginPage;
+import com.dcits.busi.lejia.page.LeJiaMainPage;
 import com.dcits.yi.tool.AssertUtil;
 import com.dcits.yi.ui.usecase.UseCase;
 
@@ -16,8 +16,8 @@ import com.dcits.yi.ui.usecase.UseCase;
  */
 public class Lejia {	
 	
-	public LoginPage loginPage;
-	public MainPage mainPage;
+	public LeJiaLoginPage loginPage;
+	public LeJiaMainPage mainPage;
 		
 	public LoginData loginData;
 	public LoginData loginData2;

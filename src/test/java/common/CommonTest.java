@@ -3,6 +3,7 @@ package common;
 import com.dcits.busi.baidu.usecase.Baidu;
 import com.dcits.yi.WebTest;
 import com.dcits.yi.ui.report.manage.CucumberReportManager;
+import com.dcits.yi.ui.report.manage.MailNotifyReportManager;
 
 /**
  * 
@@ -19,7 +20,7 @@ public class CommonTest {
 		
 		//传入一个或多个测试报告处理器对象
 		
-		test.setReportManagers(new CucumberReportManager());		
+		test.setReportManagers(new MailNotifyReportManager());		
 		
 		//常规启动测试
 		test.start();
