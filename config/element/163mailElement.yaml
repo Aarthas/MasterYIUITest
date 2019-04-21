@@ -2,7 +2,7 @@
 LoginPage: 
   url: https://mail.163.com/
   
-  loginframe: id x-URS-iframe
+  loginframe: xpath //*[contains(@id,"x-URS-iframe")]
   
   用户名输入框: xpath //*[@name="email"] loginframe     
   密码输入框: xpath //*[@name="password"] loginframe
