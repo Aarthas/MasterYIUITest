@@ -29,7 +29,7 @@ public class MailNotifyReportManager implements IReportManager {
 
 	@Override
 	public String manage(SuiteReport reportData) {
-		//检查有没有生成测试报告文件，默认采用的ztest报告,如果没有则会先生成
+		//检查有没有生成测试报告文件 默认采用的ztest报告,如果没有则会先生成
 		String ztestHtml = GlobalTestConfig.ENV_INFO.getReportFolder() + "/" + reportData.getReportName() + "_ztest" + ".html";
 		if (!FileUtil.exist(ztestHtml)) {
 			new ZTestReportManager().manage(reportData);

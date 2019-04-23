@@ -89,6 +89,10 @@ public class EnvSettingInfo {
 		super();
 	}
 
+	/**
+	 * 初始化各环境变量
+	 * @param props
+	 */
 	public EnvSettingInfo(Props props) {
 		super();
 		remoteMode = props.getBool("remote_mode", false);

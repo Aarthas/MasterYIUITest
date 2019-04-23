@@ -37,7 +37,6 @@ public class DefaultExeclReportManager implements IReportManager {
 
 	@Override
 	public String createReportPath(String reportName) {
-		// TODO Auto-generated method stub
 		return GlobalTestConfig.ENV_INFO.getReportFolder() + "/" + reportName + ".xlsx";
 	}
 }

@@ -6,15 +6,12 @@ import com.dcits.yi.springboot.Application;
 import com.dcits.yi.ui.EnvSettingInfo;
 import com.dcits.yi.ui.GlobalTestConfig;
 
-import cn.hutool.core.io.FileUtil;
-
 /**
  * 执行入口：以jar包方式运行测试
  * @author xuwangcheng
  * @version 20181012
  *
  */
-
 public class StartTest {
 	public static void main(String[] args) throws Exception {
 		EnvSettingInfo.DEV_MODE = false;

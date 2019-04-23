@@ -190,6 +190,7 @@ public class ApiController {
 	 * @param suite suite配置文件名称，不带后缀
 	 * @return
 	 */
+	@SuppressWarnings("rawtypes")
 	@RequestMapping(value = "/api/viewSuite", method = RequestMethod.GET)
 	public ReturnJSONObject viewSuite(HttpServletRequest request) {
 		ReturnJSONObject json = new ReturnJSONObject();

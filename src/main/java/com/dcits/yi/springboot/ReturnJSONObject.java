@@ -4,7 +4,7 @@ import cn.hutool.core.util.StrUtil;
 import cn.hutool.json.JSONObject;
 
 /**
- * 
+ * 默认返回json对象格式
 * @version 1.0.0
 * @Description 默认返回json对象格式
 * @author xuwangcheng

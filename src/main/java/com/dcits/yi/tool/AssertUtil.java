@@ -3,7 +3,7 @@ package com.dcits.yi.tool;
 import cn.hutool.core.util.StrUtil;
 
 /**
- * 断言
+ * 断言工具
 * @author xuwangcheng  
 * @date 2018年11月11日  
 * @version 1.0.0  

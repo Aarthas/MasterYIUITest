@@ -27,7 +27,6 @@ public class ZTestReportManager implements IReportManager {
 
 	public ZTestReportManager() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 
 	/**

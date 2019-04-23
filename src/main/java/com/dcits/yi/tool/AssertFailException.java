@@ -23,6 +23,7 @@ public class AssertFailException extends RuntimeException {
 	 */
 	private static final long serialVersionUID = 1L;
 
+	@SuppressWarnings("unused")
 	private AssertFailException(Throwable e) {
 		super(ExceptionUtil.getMessage(e), e);
 	}

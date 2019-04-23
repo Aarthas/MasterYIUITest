@@ -17,7 +17,6 @@ public class CucumberReportManager implements IReportManager {
 
 	@Override
 	public String manage(SuiteReport reportData) {
-		// TODO Auto-generated method stub
 		String json = JSONUtil.parse(reportData).toString();
 		String report = FileUtil.readString(TestKit.getProjectRootPath() + "/template/webReport.xml", "utf-8");
 		

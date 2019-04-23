@@ -83,6 +83,10 @@ public class TestKit {
 		return rootClassPath;
 	}
 	
+	/**
+	 * 获取默认ClassLoader
+	 * @return
+	 */
 	private static ClassLoader getClassLoader() {
 		ClassLoader ret = Thread.currentThread().getContextClassLoader();
 		return ret != null ? ret : TestKit.class.getClassLoader();
@@ -94,6 +98,7 @@ public class TestKit {
 	 * @return Map
 	 * @throws Exception 
 	 */
+	@SuppressWarnings("rawtypes")
 	public static Map parseYaml(String filePath) throws Exception {
 		try {
 			FileReader fileReader = new FileReader(filePath);

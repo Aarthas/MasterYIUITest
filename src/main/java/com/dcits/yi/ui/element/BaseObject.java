@@ -13,7 +13,7 @@ import cn.hutool.log.Log;
 import cn.hutool.log.LogFactory;
 
 /**
- * 
+ * 基础测试对象（页面或者页面元素都适用）
  * @author xuwangcheng
  * @version 20181012
  *

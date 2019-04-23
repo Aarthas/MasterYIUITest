@@ -15,7 +15,7 @@ import cn.hutool.setting.dialect.Props;
 
 
 /**
- * 测试数据库类
+ * 测试数据库类:根据配置文件自动化创建数据库连接，以便在测试过程中快速使用
  * @author xuwangcheng
  * @version 20181012
  *
@@ -51,6 +51,13 @@ public class TestDB {
 		this.name = name;
 	}
 
+	/**
+	 * 根据配置文件获取数据库连接实例，不同类型的数据库需要提前加入对应的驱动程序
+	 * @param p
+	 * @param name
+	 * @return
+	 * @throws Exception
+	 */
 	public static TestDB getInstance(Props p, String name) throws Exception {
 		String type = p.getStr("db." + name + ".type").trim();
 		String driverClass = p.getStr("db." + name + ".driverClass");
@@ -66,12 +73,16 @@ public class TestDB {
 		try {
 			db.connect();
 		} catch (Exception e) {
-			// TODO: handle exception
 			throw new Exception(e);
 		}
 		return db;
 	}
 	
+	/**
+	 * 执行sql，多条记录只会取第一条
+	 * @param sql
+	 * @return
+	 */
 	public String execSql(String sql) {
 		try {
 			this.conn = DriverManager.getConnection(dbUrl, dbUser, password);
@@ -92,14 +103,12 @@ public class TestDB {
     			break;
     		}
 		} catch (Exception e) {
-			// TODO: handle exception
 			logger.error(e, "数据库查询出错[{}]", this.name);
 		} finally {
 			if (ps != null) {
 				try {
 					ps.close();
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -108,7 +117,6 @@ public class TestDB {
 				try {
 					rs.close();
 				} catch (SQLException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}
@@ -118,6 +126,11 @@ public class TestDB {
     	return returnStr;
 	};
 	
+	/**
+	 * 通过自定义的ExecOperater来执行sql并获取值
+	 * @param oper
+	 * @return
+	 */
 	public String execSql(ExecOperater oper) {
 		try {
 			this.conn = DriverManager.getConnection(dbUrl, dbUser, password);
@@ -130,16 +143,24 @@ public class TestDB {
 		return result;
 	}
 	
+	/**
+	 * 关闭连接
+	 */
 	public void closeConnection() {
 		if (this.conn != null) {
 			try {
 				this.conn.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
 	};
+	
+	/**
+	 * 创建连接
+	 * @throws ClassNotFoundException
+	 * @throws SQLException
+	 */
 	public void connect() throws ClassNotFoundException, SQLException {
 		Class.forName(this.driverClass);
 		this.conn = DriverManager.getConnection(dbUrl, dbUser, password);

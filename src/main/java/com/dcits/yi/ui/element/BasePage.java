@@ -34,7 +34,7 @@ public class BasePage extends BaseObject implements IBasePage {
 	private static final Log logger = LogFactory.get();
 	
 	/**
-	 * 当前页面得url,非必须
+	 * 当前页面的url,非必须，实际上在测试过程中可以实时传入
 	 */
 	protected String url;
 	
@@ -66,7 +66,6 @@ public class BasePage extends BaseObject implements IBasePage {
 			logger.info("截图成功 => {}", capturePath);
 			return capturePath;
 		} catch (Exception e) {
-			// TODO: handle exception
 			logger.error("截图过程中出错了 => {}", e.getMessage());
 		}	
 		return null;
@@ -76,6 +75,7 @@ public class BasePage extends BaseObject implements IBasePage {
 	 * 初始化该页面对象，自动完成页面中各元素对象的初始化
 	 * @throws Exception
 	 */
+	@SuppressWarnings("rawtypes")
 	public void initPageObject () throws Exception {
 		//获取页面对应的element元素Map		
 		String pageName = this.getClass().getSimpleName().split("\\$\\$")[0];

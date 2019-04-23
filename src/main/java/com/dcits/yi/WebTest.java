@@ -60,7 +60,9 @@ public class WebTest {
 	private String tag = "default";	
 	private int retryCount = 2;
 	
-	private String suiteYamlFileName;	
+	private String suiteYamlFileName;
+	
+	@SuppressWarnings("rawtypes")
 	private Class[] caseClasses;
 
 	/**
@@ -72,6 +74,9 @@ public class WebTest {
 	 */
 	private Map<String, List<ExecuteCaseModel>> tagCases = new HashMap<String, List<ExecuteCaseModel>>();
 	
+	/**
+	 * 报告处理器
+	 */
 	private Set<IReportManager> reportManagers = CollUtil.newLinkedHashSet();
 	
 	private static Object lock = new Object();
@@ -80,7 +85,9 @@ public class WebTest {
 	 * 分别表示 finishCount,successCount,failCount, SkipCount
 	 */
 	private AtomicInteger[] testCounts;
-	
+	/**
+	 * 本次执行的用例总数
+	 */
 	private int totalCount = 0;
 	
 	/**
@@ -101,6 +108,7 @@ public class WebTest {
 	 * @param caseClasses 指定多个需要执行的Case类，根据类中用例方法上的UseCase注解规则来执行
 	 * @throws Exception 
 	 */
+	@SuppressWarnings("rawtypes")
 	public WebTest(Class ... caseClasses) throws Exception {
 		super();
 		logger.info("欢迎你使用易大师UI自动化测试框架，当前版本为[{}]", TestConst.FRAMEWORK_VERSION);
@@ -234,7 +242,6 @@ public class WebTest {
 				r.manage(GlobalTestConfig.report);
 				logger.info("报告处理器 [{}]执行成功!", r.getClass().getName());
 			} catch (Exception e) {
-				// TODO: handle exception
 				logger.error(e, "[{}] 报告处理器执行出错！", r.getClass().getName());
 			}
 			
@@ -336,6 +343,7 @@ public class WebTest {
 	 * 根据yaml文件解析执行用例信息
 	 * @throws Exception
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private void parseSuiteYaml() throws Exception {
 		if (StrUtil.isEmpty(suiteYamlFileName)) {
 			return;
@@ -409,7 +417,6 @@ public class WebTest {
 			}
 			logger.info("测试用例配置文件{}.yaml解析完成", this.suiteYamlFileName);
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			logger.error(e, "测试用例配置文件{}.yaml解析过程中出错", this.suiteYamlFileName);
 			throw e;
 		}
@@ -420,6 +427,7 @@ public class WebTest {
 	 * 根据用例类中的方法注解UseCase来解析执行用例情况
 	 * @throws Exception
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private void parseCaseClasses() throws Exception {
 		if (caseClasses.length == 0) {
 			return;

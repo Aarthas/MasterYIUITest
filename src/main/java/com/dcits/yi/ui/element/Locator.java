@@ -66,6 +66,7 @@ public class Locator {
 		super();
 	}
 	
+	@SuppressWarnings("rawtypes")
 	public Locator(String name, String info, Map elementMap) {
 		super();
 		String[] infos = info.split("\\s+");
@@ -168,6 +169,7 @@ public class Locator {
 	 * @return
 	 * @throws Exception
 	 */
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	private By getBy() throws Exception {
 		Class clz = Class.forName("org.openqa.selenium.By$By" + BaseObject.LOCATION_TYPES.get(locationType.toLowerCase().trim()));
 		Constructor ctr = clz.getConstructor(String.class);

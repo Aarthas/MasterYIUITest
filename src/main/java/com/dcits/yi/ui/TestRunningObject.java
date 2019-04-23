@@ -20,7 +20,7 @@ import cn.hutool.log.Log;
 import cn.hutool.log.LogFactory;
 
 /**
- * 属于每个线程的测试运行对象
+ * 分布式测试时，属于每个线程的测试运行对象
  * @author xuwangcheng
  * @version 20181012
  *
@@ -107,7 +107,6 @@ public class TestRunningObject {
 			driver.switchTo().frame(locator.getElement(driver));
 			currentFrameName = locator.getName();
 		} catch (Exception e) {
-			// TODO: handle exception
 			logger.info("Switch To Frame {}:{} => {}[{}] Fail!", locator.getName(), locator.getLocationType(), locator.getLocationValue(), locator.getLocationSeq());
 			throw e;
 		}

@@ -29,7 +29,7 @@ import net.sourceforge.tess4j.Tesseract;
 import net.sourceforge.tess4j.util.ImageHelper;
 
 /**
- * 元素对象基类
+ * 页面元素对象基类
  * @author xuwangcheng
  * @version 20181012
  *
@@ -82,7 +82,6 @@ public class PageElement extends BaseObject implements IBaseElement {
 		try {	
 			ele = locator.getElement(getDriver());			
 		} catch (Exception e) {
-			// TODO: handle exception
 			logger.error("无法定位到元素 [{}][{} => {}{}],  当前Frame：{}", getName(), locator.getLocationType(), locator.getLocationValue()
 					, (locator.getLocationSeq() > 0 ? "[" + locator.getLocationSeq() + "]" : "")
 					, GlobalTestConfig.getTestRunningObject().getCurrentFrameName());

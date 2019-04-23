@@ -29,7 +29,9 @@ public class GlobalTestConfig {
 	
 	public static SuiteReport report;
 	
-	public static Map<String, TestDB> dbConnections = new HashMap<String, TestDB>();	
+	public static Map<String, TestDB> dbConnections = new HashMap<String, TestDB>();
+	
+	@SuppressWarnings("rawtypes")
 	public static Map elements = new HashMap<>();	
 	
 	private static ThreadLocal<TestRunningObject> tro = new ThreadLocal<TestRunningObject>();
@@ -60,6 +62,9 @@ public class GlobalTestConfig {
 		tro.remove();
 	}
 	
+	/**
+	 * 解析配置config文件
+	 */
 	private static void parseConfig() {	
 		Props props = new Props(new File(TestKit.getProjectRootPath() + "/seleniumConfig.properties"));	
 		
@@ -72,7 +77,6 @@ public class GlobalTestConfig {
 				try {
 					dbConnections.put(dbName, TestDB.getInstance(props, dbName));
 				} catch (Exception e) {
-					// TODO Auto-generated catch block
 					logger.error(e, "获取标识名称为 [{}] 的数据连接失败!", dbName);
 				}
 			}
@@ -81,6 +85,11 @@ public class GlobalTestConfig {
 		}			
 	}	
 	
+	/**
+	 * 解析定义元素的yaml文件
+	 * @param filePath
+	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private static void parseElementYaml(String filePath) {
 		for (File f:FileUtil.ls(filePath)) {
 			if (FileUtil.isDirectory(f)) {
@@ -92,13 +101,15 @@ public class GlobalTestConfig {
 						elements.putAll(m);
 					}
 				} catch (Exception e) {
-					// TODO: handle exception
 				}				
 			}
 			
 		}
 	}
 	
+	/**
+	 * 初始化测试框架
+	 */
 	public static void initFramework() {
 		logger.info("解析测试配置文件seleniumConfig.properties");
 		parseConfig();			

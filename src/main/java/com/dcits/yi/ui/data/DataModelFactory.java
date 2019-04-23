@@ -7,7 +7,7 @@ import cn.hutool.log.Log;
 import cn.hutool.log.LogFactory;
 
 /**
- * 数据模型工程类
+ * 数据模型实例工厂
  * @author xuwangcheng
  * @version 20181012
  *
@@ -15,6 +15,7 @@ import cn.hutool.log.LogFactory;
 public class DataModelFactory {
 	private static final Log logger = LogFactory.get();
 	
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public static <T extends BaseDataModel> T getDataModelInstance(Class clazz) {
 		try {
 			BaseDataModel model = (BaseDataModel) Singleton.get(clazz);
@@ -25,7 +26,6 @@ public class DataModelFactory {
 			}						
 			return (T) model;
 		} catch (Exception e) {
-			// TODO: handle exception
 			logger.error(e, "创建数据模型实例失败![{}]", clazz.getName());
 			return null;
 		}		

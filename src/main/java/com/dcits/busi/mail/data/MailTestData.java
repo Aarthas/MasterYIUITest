@@ -29,7 +29,6 @@ public class MailTestData extends BaseDataModel {
 	public void initData() {
 		Props p = new Props(TestKit.getProjectRootPath() + "/config/data/email.data");
 		
-		
 		send_email = p.getStr("send_email");
 		send_password = p.getStr("send_password");
 		

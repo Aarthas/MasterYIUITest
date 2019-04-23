@@ -145,7 +145,6 @@ public class ReportPersistenceReportManager implements IReportManager {
 			try {
 				ps.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -153,7 +152,6 @@ public class ReportPersistenceReportManager implements IReportManager {
 			try {
 				conn.close();
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}

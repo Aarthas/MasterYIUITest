@@ -29,7 +29,7 @@ public abstract class BaseDataModel {
 	private static final Log logger = LogFactory.get();
 	
 	/**
-	 * 是否为初次初始化该数据，通过此参数判断是否在initData方法中执行destroyData方法
+	 * 是否为初次初始化该数据，可以通过此参数判断是否在initData方法中执行destroyData方法
 	 */
 	protected boolean firstInitFlag = true;
 	
@@ -38,6 +38,9 @@ public abstract class BaseDataModel {
 	 */
 	public abstract void initData();
 	
+	/**
+	 * 定义销毁数据的方法，可以测试过程中、initData之前手动调用，在测试结束之后，框架也会自动化调用该方法
+	 */
 	public abstract void destroyData();
 	
 	

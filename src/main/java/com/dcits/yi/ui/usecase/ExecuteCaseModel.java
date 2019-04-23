@@ -58,6 +58,7 @@ public class ExecuteCaseModel {
 	
 	/**
 	 * 执行该用例的自动化测试
+	 * @param browserName
 	 */
 	public void execute(String browserName) {
 		logger.info("开始执行测试用例 {}[tag={}][broswerType={}] ", name, tag, browserName);

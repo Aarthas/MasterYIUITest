@@ -25,6 +25,7 @@ public class AutoGeneratePageModel {
 		generate("163mailElement", "com.dcits.test.mail.data");
 	}
 	
+	@SuppressWarnings("rawtypes")
 	public static void generate (String yamlFileName, String packageName) throws Exception {
 		//读取yaml文件
 		String path = TestKit.getProjectRootPath() + "/config/element/" + yamlFileName + ".yaml";

@@ -6,6 +6,13 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
+/**
+ * 标注方法为测试用例的注解
+* @version 1.0.0
+* @Description 
+* @author xuwangcheng
+* @date 2019年4月23日下午4:14:20
+ */
 @Documented
 @Target(ElementType.METHOD)
 @Retention(RetentionPolicy.RUNTIME)
