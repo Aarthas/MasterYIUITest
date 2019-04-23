@@ -1,8 +1,15 @@
 package common;
 
+<<<<<<< HEAD
 import org.springframework.boot.SpringApplication;
 
 import com.dcits.yi.springboot.Application;
+=======
+import com.dcits.busi.baidu.usecase.Baidu;
+import com.dcits.yi.WebTest;
+import com.dcits.yi.ui.report.manage.CucumberReportManager;
+import com.dcits.yi.ui.report.manage.MailNotifyReportManager;
+>>>>>>> 1e5207199ce2685f3d02a8f7add77e40fc4e4c49
 
 /**
  * 
@@ -19,7 +26,11 @@ public class CommonTest {
 		
 		//传入一个或多个测试报告处理器对象
 		
+<<<<<<< HEAD
 		//test.setReportManagers(new CucumberReportManager());		
+=======
+		test.setReportManagers(new MailNotifyReportManager());		
+>>>>>>> 1e5207199ce2685f3d02a8f7add77e40fc4e4c49
 		
 		//常规启动测试
 		//test.start();

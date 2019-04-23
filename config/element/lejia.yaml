@@ -1,5 +1,5 @@
 # 登录页面
-LoginPage:
+LeJiaLoginPage:
   url: http://school.leyunshe.com.cn/npage/login.html
   用户名输入框: name loginNo
   密码输入框: id password
@@ -7,7 +7,7 @@ LoginPage:
   
 
 # 登录完成的主页面
-MainPage:
+LeJiaMainPage:
 
   # 主页面iframe
   mainFrame: tagname iframe[1]
