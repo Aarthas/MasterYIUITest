@@ -24,6 +24,14 @@ public class MailTest {
 	@UseCase(name="163邮箱测试", tag="mail")
 	public void mailTest() throws Exception {
 		loginPage.open();
+		loginPage.登录(data.send_email, data.send_password);
+		mailPage.verifyLogin(data.send_email);
+		mailPage.sendEmail(data.receive_email, "易大师测试", data.send_content);
+		mailPage.logout();
+		logoutPage.verifyLogout();
+		
+		logoutPage.重新登录按钮.click();
+		
 		loginPage.登录(data.receive_email, data.receive_password);
 		mailPage.verifyLogin(data.receive_email);
 		mailPage.reveiceEmail(data.send_email);
