@@ -3,6 +3,7 @@
 
  **_当前版本：0.4.1beta_**  
  **_更新日期：2019-01-11_** 
+ **该框架不再更新，但是有任何问题依然可以进群找我。** 
 
 
 码云地址：https://gitee.com/xuwangcheng/MasterYI-UI-Test-Framework  
