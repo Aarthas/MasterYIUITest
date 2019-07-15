@@ -16,7 +16,7 @@
 
 <br>
 
- **基于PageMode模型进行测试代码编程的UI自动化测试框架，元素定位、业务逻辑、测试数据分离;底层由selenium-java框架支持，使用yaml文件定义元素定位和用例执行规则。** 
+ **基于PageObject模型进行测试代码编程的UI自动化测试框架，元素定位、业务逻辑、测试数据分离;底层由selenium-java框架支持，使用yaml文件定义元素定位和用例执行规则。** 
  
  **主要功能：**  
 - [yaml文件定义元素信息，方便阅读、编写和维护](https://gitee.com/xuwangcheng/MasterYI-UI-Test-Framework/wikis/pages?title=%E5%85%83%E7%B4%A0%E5%AE%9A%E4%B9%89&parent=%E4%BD%BF%E7%94%A8%E8%AF%B4%E6%98%8E)；  
