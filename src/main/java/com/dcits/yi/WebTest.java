@@ -253,14 +253,8 @@ public class WebTest {
 	 */
 	public void clean() {	
 		//关闭WebDriver
-		for (String key:GlobalTestConfig.getTestRunningObject().getDrivers().keySet()) {
-			WebDriver driver = GlobalTestConfig.getTestRunningObject().getDrivers().get(key);
-			if (driver != null) {
-				logger.info("关闭webdriver[{} for {}]", key, TestKit.getOsName());
-				driver.quit();
-			}
-		}
-		
+//		closeWebDriver();
+
 		//清理temp文件夹		
 		FileUtil.clean(TestConst.TEST_TEMP_FLODER);
 		logger.info("清理temp文件夹[{}]成功!", TestConst.TEST_TEMP_FLODER);
@@ -270,9 +264,22 @@ public class WebTest {
 			d.destroyData();
 		}
 		//remove线程对象
+
+	}
+
+	public void closeWebDriver() {
+		//关闭WebDriver
+		for (String key: GlobalTestConfig.getTestRunningObject().getDrivers().keySet()) {
+			WebDriver driver = GlobalTestConfig.getTestRunningObject().getDrivers().get(key);
+			if (driver != null) {
+				logger.info("关闭webdriver[{} for {}]", key, TestKit.getOsName());
+				driver.quit();
+			}
+		}
+		//remove线程对象
 		GlobalTestConfig.removeTestRunningObject();
 	}
-	
+
 	/**
 	 * 	自动化测试
 	 * @param execuCaseModels

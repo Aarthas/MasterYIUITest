@@ -64,7 +64,8 @@ public class PageElement extends BaseObject implements IBaseElement {
 	 */
 	public PageElement setParams(Object... params) {
 		if (locator.getPlaceholderParamsCount() >= 1) {
-			locator.setLocationValue(StrUtil.format(locator.getLocationValue(), params));
+			String format = StrUtil.format(locator.getOriginallocationValue(), params);
+			locator.setLocationValue(format);
 		}				
 		return this;
 	}

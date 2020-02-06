@@ -20,10 +20,27 @@ public class Baidu {
 	public void search() throws Exception {
 		搜索页面.open();
 		搜索页面.search("xuwangcheng.com");
-		搜索结果页面.搜索结果.setParams(1);
-		搜索结果页面.clickFirst();	
+		搜索结果页面.搜索结果.setParams(2);
+		搜索结果页面.搜索结果.click();
+		String title = 搜索结果页面.getTitle();
+		System.out.println(title);
 		搜索页面.switchWindow(1);
 		搜索页面.switchWindow(0);
 		搜索页面.refresh();
+		System.out.println("asd");
+	}
+
+	@UseCase(name="百度搜索2", tag="baidu", browserType = {"chrome"})
+	public void search2() throws Exception {
+		搜索页面.open();
+		搜索页面.search("沈逸斌");
+		搜索结果页面.搜索结果.setParams(3);
+		搜索结果页面.搜索结果.click();
+		String title = 搜索结果页面.getTitle();
+		System.out.println(title);
+		搜索页面.switchWindow(1);
+		搜索页面.switchWindow(0);
+		搜索页面.refresh();
+		System.out.println("asd");
 	}
 }

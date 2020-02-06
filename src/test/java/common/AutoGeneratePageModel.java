@@ -22,7 +22,7 @@ import cn.hutool.json.JSONObject;
  */
 public class AutoGeneratePageModel {
 	public static void main(String[] args) throws Exception {
-		generate("163mailElement", "com.dcits.test.mail.data");
+		generate("baidu", "com.dcits.aa");
 	}
 	
 	@SuppressWarnings("rawtypes")
