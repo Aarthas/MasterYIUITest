@@ -22,7 +22,7 @@ import cn.hutool.json.JSONObject;
  */
 public class AutoGeneratePageModel {
 	public static void main(String[] args) throws Exception {
-		generate("baidu", "com.dcits.aa");
+		generate("jk/login", "com.dcits.busi.jk");
 	}
 	
 	@SuppressWarnings("rawtypes")

@@ -2,8 +2,10 @@ package common;
 
 //import com.dcits.busi.baidu.usecase.Baidu;
 import com.dcits.busi.baidu.usecase.Baidu;
+import com.dcits.busi.jk.usercase.LoginTest;
 import com.dcits.yi.WebTest;
 import com.dcits.yi.ui.report.manage.MailNotifyReportManager;
+import com.dcits.yi.ui.report.manage.ZTestReportManager;
 
 /**
  *
@@ -16,11 +18,11 @@ public class CommonTest {
 
 	public static void main(String[] args) throws Exception {
 		//实例化WebTest对象，可传入suite文件或者多个测试用例类
-		WebTest test = new WebTest(Baidu.class);
+		WebTest test = new WebTest(LoginTest.class);
 
 		//传入一个或多个测试报告处理器对象
 
-//		test.setReportManagers(new MailNotifyReportManager());
+		test.setReportManagers(new ZTestReportManager());
 
 		//常规启动测试
 		test.start();

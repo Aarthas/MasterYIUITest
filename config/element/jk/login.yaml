@@ -1,7 +1,5 @@
-LoginPage:
+LoginPage1:
   url: https://jdznjjtest.auxgroup.com/cc-dev/
   username: id username
   password: id password
-  
-#RegisterPage:
-#  搜索结果: xpath //*[@id="{}"]/h3/a
+  loginBtn: xpath //*[@id="formLogin"]/div[3]/div/div/span/button

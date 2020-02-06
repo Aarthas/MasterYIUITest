@@ -18,7 +18,13 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface UseCase {
 	//用例名称，必填
+
+
 	String name();
+
+	String point() default ""; ;
+	int order() default 0; ;
+
 	//为true时执行该用例方法，否则不执行
 	boolean enabled() default true; 
 	//执行失败时是否中断整个测试流程
