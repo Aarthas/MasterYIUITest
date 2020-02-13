@@ -8,7 +8,7 @@ import com.dcits.yi.ui.element.PageElement;
  * @author xuwangcheng14@163.com
  */
 
-public class LoginPage extends BasePage {
+public class MailLoginPage extends BasePage {
 	
 	public PageElement 用户名输入框;	
 	public PageElement 密码输入框;	
@@ -21,7 +21,6 @@ public class LoginPage extends BasePage {
 		//等待验证码，手工输入
 		//sleep(20);
 		登录按钮.click();
-		sleep(1);
 		screenshot();
 	}
 }

@@ -1,6 +1,7 @@
 package common;
 
 import java.io.File;
+import java.util.List;
 import java.util.Map;
 
 import com.dcits.yi.tool.TestKit;
@@ -22,13 +23,21 @@ import cn.hutool.json.JSONObject;
  */
 public class AutoGeneratePageModel {
 	public static void main(String[] args) throws Exception {
-		generate("jk/login", "com.dcits.busi.jk");
+
+		File f = new File("config/element/jk");
+
+		List<File> files = FileUtil.loopFiles("/Users/yibinshen/program/test/MasterYI-UI-Test-Framework/config/element/jk");
+		for (File file : files) {
+			System.out.println(file);
+			generate(file.getAbsolutePath(), "com.dcits.busi.jk.page");
+		}
+
+//		generate("jk/login", "com.dcits.busi.jk");
 	}
 	
 	@SuppressWarnings("rawtypes")
-	public static void generate (String yamlFileName, String packageName) throws Exception {
+	public static void generate (String path, String packageName) throws Exception {
 		//读取yaml文件
-		String path = TestKit.getProjectRootPath() + "/config/element/" + yamlFileName + ".yaml";
 		if (!FileUtil.exist(path)) {
 			throw new Exception("元素定义yaml文件存在，请检查  => " + path);
 		}

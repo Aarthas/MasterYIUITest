@@ -1,5 +1,0 @@
-LoginPage1:
-  url: https://jdznjjtest.auxgroup.com/cc-dev/
-  username: id username
-  password: id password
-  loginBtn: xpath //*[@id="formLogin"]/div[3]/div/div/span/button

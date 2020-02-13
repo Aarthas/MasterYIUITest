@@ -1,11 +1,13 @@
 package com.dcits.busi.jk.usercase;
 
-import com.dcits.busi.jk.LoginPage1;
+import com.dcits.busi.jk.page.LoginPage;
+import com.dcits.busi.mail.page.MailLoginPage;
 import com.dcits.yi.ui.usecase.UseCase;
 
 public class LoginTest {
 
-    public LoginPage1 loginPage;
+
+    public LoginPage loginPage;
 
     @UseCase(name = "登录测试 ", point = "手机号为空", order = 0, tag = "jk", browserType = {"chrome"})
     public void a1() throws Exception {

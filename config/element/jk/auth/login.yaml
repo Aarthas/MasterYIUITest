@@ -1,0 +1,26 @@
+LoginPage:
+  url: https://smarthomelink.aux-home.com/cc-dev/#/account/settings/security
+  username: id username
+  password: xpath /html/body/div/div/div/div[2]/div/form/div[1]/div[3]/div/div[3]/div/div/span/span/input
+  loginBtn: xpath //*[@id="formLogin"]/div[3]/div/div/span/button
+  resetpwd_btn: linktext 忘记密码
+  register_btn: linktext 注册账户
+
+RegisterPage:
+    mobile: id mobile
+    password: id password
+    password2: id password2
+    sendSms: linktext 获取验证码
+    submit: linktext 注册
+    back: linktext 使用已有账户登录
+
+
+ResetPwdPage:
+  mobile: id mobile
+  password: id password
+  password2: id password2
+  sendSms: linktext 获取验证码
+  submit: linktext 提交
+  back: linktext 使用已有账户登录
+
+

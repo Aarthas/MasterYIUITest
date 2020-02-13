@@ -89,8 +89,13 @@ public class PageElement extends BaseObject implements IBaseElement {
 			getStepReport().setMark(StrFormatter.format("元素定位失败:{} => {}{}\n", locator.getLocationType(), locator.getLocationValue()
 					, (locator.getLocationSeq() > 0 ? "[" + locator.getLocationSeq() + "]" : "")));
 		}
-		
-		sleep(GlobalTestConfig.ENV_INFO.getDefaultSleepSeconds());
+
+		try {
+			Thread.sleep((long) (GlobalTestConfig.ENV_INFO.getDefaultSleepSeconds()*1000));
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+
 		return ele;
 	}
 

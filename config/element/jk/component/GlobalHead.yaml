@@ -1,0 +1,10 @@
+GlobalHead:
+  主页: linktext 主页
+  设备控制: linktext 设备控制
+  设备管理: linktext 设备管理
+  场景: linktext 场景
+  系统管理: linktext 系统管理
+  单位名称: linktext 单位名称
+
+  usermenu: xpath //*[@id="app"]/div/div/div[1]/div/div/div/div[2]/div[1]/span[2]/span[2]
+

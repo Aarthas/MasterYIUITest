@@ -1,7 +1,7 @@
 package com.dcits.busi.mail.usecase;
 
 import com.dcits.busi.mail.data.MailTestData;
-import com.dcits.busi.mail.page.LoginPage;
+import com.dcits.busi.mail.page.MailLoginPage;
 import com.dcits.busi.mail.page.MailLogoutPage;
 import com.dcits.busi.mail.page.MailPage;
 import com.dcits.yi.ui.usecase.UseCase;
@@ -15,7 +15,7 @@ import com.dcits.yi.ui.usecase.UseCase;
  */
 public class MailTest {
 
-	public LoginPage loginPage;
+	public MailLoginPage loginPage;
 	public MailPage mailPage;
 	public MailLogoutPage logoutPage;
 	

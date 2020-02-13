@@ -1,0 +1,7 @@
+ChangePwdPage:
+  修改: linktext 修改
+
+  oldpassword: id oldpassword
+  password: id password
+  confirmpassword: id confirmpassword
+  ok: xpath /html/body/div[3]/div/div[2]/div/div[2]/div[3]/div/button[2]

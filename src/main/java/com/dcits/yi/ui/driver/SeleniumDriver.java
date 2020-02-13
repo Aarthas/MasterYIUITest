@@ -6,6 +6,7 @@ import java.net.URL;
 import com.dcits.yi.tool.TestKit;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.htmlunit.HtmlUnitDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
@@ -45,6 +46,8 @@ public class SeleniumDriver {
 	
 	private static WebDriver initWebdriver(String browserName) {
 		WebDriver driver = null;
+		ChromeOptions chromeOptions = new ChromeOptions();
+		chromeOptions.addArguments("start-maximized", "no-sandbox", "user-data-dir=/Users/yibinshen/program/test/MasterYI-UI-Test-Framework/userdatafolder");
 		switch (browserName.toLowerCase()) {
 		case TestConst.BROWSER_CHROME:
 			driver = new ChromeDriver();

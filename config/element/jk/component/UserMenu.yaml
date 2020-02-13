@@ -1,0 +1,10 @@
+UserMenu:
+  个人中心: linktext 个人中心
+  设置: linktext 设置
+  切换单位: xpath /html/body/div[3]/div/div/ul/li[3]/a
+  帮助与反馈: xpath /html/body/div[3]/div/div/ul/li[4]/a
+  退出登录: xpath /html/body/div[3]/div/div/ul/li[6]/a
+
+LogoutDialog:
+  ok: xpath /html/body/div[4]/div/div[2]/div/div[2]/div/div/div[2]/button[2]
+  cancel: xpath /html/body/div[4]/div/div[2]/div/div[2]/div/div/div[2]/button[1]

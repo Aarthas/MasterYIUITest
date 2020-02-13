@@ -15,14 +15,6 @@ reportManager:
 
 # 测试用例组
 cases:
-  - name: 163邮箱测试 
-    method: com.dcits.test.baidu.usecase.Baidu.search
-    # 是否执行该用例或者组合用例，为flase时该用例不会被执行
-    enabled: true   
-    tag: 2
-    failInterrupt: true
-    # browserType: [chrome, ie, firefox]
-    browserType: chrome
   
   - name: 百度搜索
     method: com.dcits.test.baidu.usecase.Baidu.search
